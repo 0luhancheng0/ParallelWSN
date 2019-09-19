@@ -25,6 +25,12 @@ struct logging
     int* reference_rank;
 };
 
+struct event_message 
+{
+    int event_num;
+    int my_rank;
+    int* reference_rank;
+};
 void get_neighbor_count(int coord[2], int* neighbor_count) {
     *neighbor_count = 4;
     if (coord[0] == 0 || coord[0] == X_SIZE-1) {
@@ -34,7 +40,10 @@ void get_neighbor_count(int coord[2], int* neighbor_count) {
         *neighbor_count -= 1;
     }
 }
-int main(int argc, char *argv[]) {
+
+
+int main(int argc, char *argv[])
+{
     int global_size, global_rank, size, rank, nneighbor, colored_rank, colored_size;
     uint8_t random_num;
     uint8_t* neighbor_result;
@@ -43,6 +52,7 @@ int main(int argc, char *argv[]) {
     int r0, r1;
     const int baserank_list[1] = {BASERANK};
     int dim[2] = {X_SIZE, Y_SIZE}, period[2] = {0}, coord[2], reorder = 0;
+    int* neighbor_rank;
     MPI_Group global_group, node_group;
     MPI_Request *reqs;
     MPI_Request trash_req;
@@ -75,28 +85,27 @@ int main(int argc, char *argv[]) {
         printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
         MPI_Alloc_mem((MPI_Aint)(nneighbor * sizeof(MPI_UINT8_T)), MPI_INFO_NULL, &neighbor_result);
         MPI_Alloc_mem((MPI_Aint)(sizeof(MPI_Request) * 4), MPI_INFO_NULL, &reqs);
-
+        MPI_Alloc_mem(nneighbor, MPI_INFO_NULL, neighbor_rank);
         for (int i=0, dim=0; dim<2; ++dim) {
             MPI_Cart_shift(node_comm, dim, 1, &r0, &r1);
             if (r0 >= 0) {
                 MPI_Isend(&random_num, 1, MPI_UINT8_T, r0, 0, node_comm, &trash_req);
                 MPI_Irecv(&neighbor_result[i], 1, MPI_UINT8_T, r0, MPI_ANY_TAG, node_comm, &reqs[i]);
+                neighbor_rank[i] = r0;
                 i++;
             }
-
             if (r1 >= 0) {
                 MPI_Isend(&random_num, 1, MPI_UINT8_T, r1, 0, node_comm, &trash_req);
                 MPI_Irecv(&neighbor_result[i], 1, MPI_UINT8_T, r1, MPI_ANY_TAG, node_comm, &reqs[i]);
+                neighbor_rank[i] = r1;
                 i++;
             }
         }
         MPI_Waitall(nneighbor, reqs, MPI_STATUSES_IGNORE);
         for (int i=0;i <nneighbor; i++) {
-            printf("rank %d received %u\n", rank, neighbor_result[i]);
+            printf("rank %d received %u from %d\n", rank, neighbor_result[i], neighbor_rank[i]);
         }
-    } 
-
-    // MPI_Comm_free(&node_comm);
+    }
     MPI_Free_mem(neighbor_result);
     MPI_Finalize();
     return(0);
