@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 2.8)
+project (fit3143-assignment C)
+find_package (MPI REQUIRED)
+
+if(NOT DEFINED ${X_SIZE})
+  set(X_SIZE 4)
+endif()
+if(NOT DEFINED ${Y_SIZE})
+  set(Y_SIZE 5)
+endif()
+
+if(NOT DEFINED ${SLOTS_NUM})
+  set (SLOTS_NUM 21)
+endif()
+
+
+configure_file (config.h.in config.h)
+configure_file (hostfile.in hostfile)
+include_directories(${PROJECT_BINARY_DIR})
+if (MPI_FOUND)
+    include_directories(SYSTEM ${MPI_INCLUDE_PATH})
+else (MPI_FOUND)
+    message(SEND_ERROR "This application cannot compile without MPI")
+endif (MPI_FOUND)
+add_executable( wsn wsn.c )
+target_link_libraries(wsn ${MPI_LIBRARIES})
+
+install (TARGETS wsn DESTINATION bin)
+install (FILES ${PROJECT_BINARY_DIR}/config.h DESTINATION include)
+install (FILES ${PROJECT_BINARY_DIR}/hostfile DESTINATION bin)
