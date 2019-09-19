@@ -1,19 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 project (fit3143-assignment C)
 find_package (MPI REQUIRED)
-
-if(NOT DEFINED ${X_SIZE})
-  set(X_SIZE 4)
-endif()
-if(NOT DEFINED ${Y_SIZE})
-  set(Y_SIZE 5)
-endif()
-
-if(NOT DEFINED ${SLOTS_NUM})
-  set (SLOTS_NUM 21)
-endif()
-
-
+SET(X_SIZE 4 CACHE STRING "number of station in x dimension")
+SET(Y_SIZE 5 CACHE STRING "number of station in y dimension")
+SET(SLOTS_NUM 21 CACHE STRING "generate hostfile for testing on single node")
+#SET(CMAKE_INSTALL_PREFIX $ENV{PWD} CACHE PATH "the default install dir is under build dir instead of system directory")
 configure_file (config.h.in config.h)
 configure_file (hostfile.in hostfile)
 include_directories(${PROJECT_BINARY_DIR})

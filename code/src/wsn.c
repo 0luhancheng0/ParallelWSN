@@ -5,12 +5,12 @@
 #include <mpi.h>
 #include <unistd.h>
 #include "config.h"
-struct logging
+typedef struct logging
 {
     int n_event;
     int* enent_num;
     int* reference_rank;
-};
+} logging;
 
 struct event_message 
 {
