@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 SET(CMAKE_INSTALL_PREFIX $ENV{PWD}/WSN_INSTALL CACHE PATH "the default install dir is under build dir instead of system directory")
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
-set(CMAKE_C_COMPILER "/usr/local/bin/mpicc" CACHE FILEPATH "" FORCE)
+set(CMAKE_C_COMPILER mpicc CACHE FILEPATH "" FORCE)
 project (fit3143-assignment C)
 find_package (MPI REQUIRED)
 SET(X_SIZE 4 CACHE STRING "number of station in x dimension")

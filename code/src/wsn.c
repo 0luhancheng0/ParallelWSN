@@ -101,7 +101,9 @@ int main(int argc, char *argv[])
         for (int i=0;i <nneighbor; i++) {
             printf("rank %d received %u from %d\n", rank, neighbor_result[i], neighbor_rank[i]);
         }
-		MPI_Free_mem(neighbor_result);
+		MPI_Free_mem(&neighbor_result);
+		MPI_Free_mem(neighbor_rank);
+		MPI_Free_mem(&reqs);
 		MPI_Comm_free(&node_comm);
     }
     MPI_Finalize();
