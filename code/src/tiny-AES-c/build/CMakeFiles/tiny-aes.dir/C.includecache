@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ChengLuhan/Desktop/Units/FIT3143/Assignment/Assignment_2/fit3143_assignment2/code/tiny-AES-c/aes.c
+stdint.h
+-
+string.h
+-
+aes.h
+/Users/ChengLuhan/Desktop/Units/FIT3143/Assignment/Assignment_2/fit3143_assignment2/code/tiny-AES-c/aes.h
+
+/Users/ChengLuhan/Desktop/Units/FIT3143/Assignment/Assignment_2/fit3143_assignment2/code/tiny-AES-c/aes.h
+stdint.h
+-
+
