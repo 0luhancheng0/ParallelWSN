@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
     int* neighbor_rank;
     MPI_Group global_group, node_group;
     MPI_Request *reqs;
+    // MPI_Request reqs[4];
     MPI_Request trash_req;
 
     MPI_Init(&argc, &argv);
@@ -81,7 +82,7 @@ int main(int argc, char *argv[])
         printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
         MPI_Alloc_mem((MPI_Aint)(nneighbor * sizeof(MPI_UINT8_T)), MPI_INFO_NULL, &neighbor_result);
         MPI_Alloc_mem((MPI_Aint)(sizeof(MPI_Request) * 4), MPI_INFO_NULL, &reqs);
-        MPI_Alloc_mem(nneighbor, MPI_INFO_NULL, neighbor_rank);
+        MPI_Alloc_mem(nneighbor, MPI_INFO_NULL, &neighbor_rank);
         for (int i=0, dim=0; dim<2; ++dim) {
             MPI_Cart_shift(node_comm, dim, 1, &r0, &r1);
             if (r0 >= 0) {
@@ -101,11 +102,14 @@ int main(int argc, char *argv[])
         for (int i=0;i <nneighbor; i++) {
             printf("rank %d received %u from %d\n", rank, neighbor_result[i], neighbor_rank[i]);
         }
-		MPI_Free_mem(&neighbor_result);
-		MPI_Free_mem(neighbor_rank);
-		MPI_Free_mem(&reqs);
+		// MPI_Free_mem(&neighbor_result);
+		// MPI_Free_mem(&neighbor_rank);
+		// MPI_Free_mem(&reqs);
 		MPI_Comm_free(&node_comm);
+        // MPI_Finalize();
+        // return(0);
     }
+    
     MPI_Finalize();
     return(0);
 }
