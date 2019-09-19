@@ -1,16 +1,13 @@
-all: wsn
 
-ROOT_DIR=.
-CC=/usr/local/bin/mpicc
-SRC=./src
-FLAGS=-fopenmp -I./src --std=c99
-.PHONY: run
-run: wsn 
-	mpirun -n 7 --hostfile ./host ./wsn --mca orte_base_help_aggregate 0
-wsn: wsn.c
-	$(CC) $< -o $@ $(FLAGS)
+all: run
+install_dir=./WSN_INSTALL
+X_SIZE?=4
+Y_SIZE?=5
+build: 
+	mkdir -p ./build/$(install_dir)
+	cd build && cmake .. -DX_SIZE=$(X_SIZE) -DY_SIZE=$(Y_SIZE) -DCMAKE_INSTALL_PREFIX=$(install_dir) && make install
+run: build
+	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))" --oversubscribe ./build/$(install_dir)/bin/wsn --mca btl_vader_backing_directory /tmp
+clean:
+	rm -rf build
 
-test_ctr: $(SRC)/ctr.c 
-	gcc $^ -o $@
-clean: 
-	rm -f wsn test_aes test_ctr

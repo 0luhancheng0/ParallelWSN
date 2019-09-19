@@ -19,11 +19,21 @@ struct event_message
     int* reference_rank;
 };
 void get_neighbor_count(int coord[2], int* neighbor_count) {
+	int *neibhbor_count;
+	// MPI_Cart_shift()	
     *neighbor_count = 4;
-    if (coord[0] == 0 || coord[0] == X_SIZE-1) {
+    if (coord[0] == 0) {
         *neighbor_count -= 1;
-    } 
-    if (coord[1] == 0 || coord[1] == Y_SIZE-1) {
+    }
+    if (coord[0] == X_SIZE-1) {
+        *neighbor_count -= 1;
+    }
+
+    if (coord[1] == 0) {
+        *neighbor_count -= 1;
+    }
+    if (coord[1] == Y_SIZE - 1)
+    {
         *neighbor_count -= 1;
     }
 }
@@ -35,7 +45,6 @@ int main(int argc, char *argv[])
     uint8_t random_num;
     uint8_t* neighbor_result;
     MPI_Comm node_comm;
-    MPI_Comm nneighbor_comm_split;
     int r0, r1;
     const int baserank_list[1] = {BASERANK};
     int dim[2] = {X_SIZE, Y_SIZE}, period[2] = {0}, coord[2], reorder = 0;
@@ -92,8 +101,9 @@ int main(int argc, char *argv[])
         for (int i=0;i <nneighbor; i++) {
             printf("rank %d received %u from %d\n", rank, neighbor_result[i], neighbor_rank[i]);
         }
+		MPI_Free_mem(neighbor_result);
+		MPI_Comm_free(&node_comm);
     }
-    MPI_Free_mem(neighbor_result);
     MPI_Finalize();
     return(0);
 }
