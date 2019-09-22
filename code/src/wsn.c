@@ -4,7 +4,7 @@
 #include <time.h>
 #include <mpi.h>
 #include <unistd.h>
-#include "config.h"
+#include "wsn.h"
 typedef struct logging
 {
     int n_event;
