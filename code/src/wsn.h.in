@@ -13,3 +13,30 @@
 
 // run sleep ITERVAL millisecond each iteration
 #define INTERVAL 100
+
+// length of message in bytes after padding precending 0s must be greater than N_BIT_RAND / 8
+#define MESSAGE_LEN 1000
+
+// The time taken to encrypt/decrypt a message before sending or after receiving. The use of OpenMP here should demonstrate improvements in encryption and/or decryption processing time.
+// - Number of messages passed throughout the network
+// - Number of events occurred throughout the network
+// - Details of nodes involved in each of the events (reference node and its adjacent nodes)
+
+typedef struct event_message {
+	int num;
+	int my_rank;
+	int* reference_rank;
+} event_message;
+
+typedef struct logging {
+	int encrypt_t;
+	int decryp_t;
+	int n_message;
+	int n_event;
+	int* reference_node;
+	int** adjacent_node;
+	event_message* messages;
+
+} logging;
+
+

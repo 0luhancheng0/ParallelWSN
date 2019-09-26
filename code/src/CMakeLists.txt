@@ -8,7 +8,7 @@ find_package (MPI REQUIRED)
 SET(X_SIZE 4 CACHE STRING "number of station in x dimension")
 SET(Y_SIZE 5 CACHE STRING "number of station in y dimension")
 
-add_subdirectory (tiny-AES-c)
+#add_subdirectory (tiny-AES-c)
 configure_file (wsn.h.in wsn.h)
 include_directories(${PROJECT_BINARY_DIR})
 if (MPI_FOUND)
