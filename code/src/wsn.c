@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
         random_num = (uint8_t)(rand() & ((1 << N_BIT_RAND) - 1));
         get_neighbor_count(coord, &nneighbor);
 
-        printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
+        printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, global_rank, coord[0], coord[1], nneighbor);
         MPI_Alloc_mem((MPI_Aint)(nneighbor * sizeof(MPI_UINT8_T)), MPI_INFO_NULL, &neighbor_result);
         MPI_Alloc_mem((MPI_Aint)(sizeof(MPI_Request) * 4), MPI_INFO_NULL, &reqs);
         MPI_Alloc_mem(nneighbor, MPI_INFO_NULL, &neighbor_rank);
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
         }
         MPI_Waitall(nneighbor, reqs, MPI_STATUSES_IGNORE);
         for (int i=0;i <nneighbor; i++) {
-            printf("rank %d received %u from %d\n", rank, neighbor_result[i], neighbor_rank[i]);
+            printf("rank %d received %u from %d\n", global_rank, neighbor_result[i], neighbor_rank[i]);
         }
 		MPI_Comm_free(&node_comm);
     } else {
