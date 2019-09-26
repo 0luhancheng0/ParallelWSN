@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include <omp.h>
 #include <stdio.h>
 
 void encrypt(uint8_t* plaintext, uint8_t* ciphertext, int message_length, uint8_t* key, int keysize) {

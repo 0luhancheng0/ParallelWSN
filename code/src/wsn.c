@@ -106,8 +106,8 @@ int main(int argc, char *argv[])
                 i++;
             }
         }
-        decrypt(neighbor_result, neighbor_result, MESSAGE_LEN, key, KEY_SIZE);
         MPI_Waitall(nneighbor, reqs, MPI_STATUSES_IGNORE);
+        decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN, key, KEY_SIZE);
         
         for (int i=0;i <nneighbor; i++) {
             printf("rank %d received %d from %d\n", rank, neighbor_result[i*MESSAGE_LEN], neighbor_rank[i]);
