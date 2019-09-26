@@ -10,5 +10,5 @@
 // run sleep ITERVAL millisecond each iteration
 #define INTERVAL 100
 
-// length of message in bytes after padding precending 0s must be greater than N_BIT_RAND / 8
-#define MESSAGE_LEN 1000
+// length of message in bytes after padding precending 0s must be greater than N_BIT_RAND / 8, need to be multiple of keysize
+#define MESSAGE_LEN 512
