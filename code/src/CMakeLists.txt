@@ -18,6 +18,7 @@ else (MPI_FOUND)
 endif (MPI_FOUND)
 add_executable( wsn wsn.c )
 target_link_libraries(wsn ${MPI_LIBRARIES})
+target_link_libraries(wsn m)
 
 install (TARGETS wsn DESTINATION bin)
 install (FILES ${PROJECT_BINARY_DIR}/wsn.h DESTINATION include)

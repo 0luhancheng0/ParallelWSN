@@ -9,5 +9,5 @@ build:
 run: build
 	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))" --oversubscribe ./build/$(install_dir)/bin/wsn --mca btl_vader_backing_directory /tmp --mca orte_base_help_aggregate 0
 clean:
-	rm -rf build
+	rm -rf build *.mpiP
 
