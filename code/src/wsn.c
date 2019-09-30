@@ -8,7 +8,45 @@
 #include <unistd.h>
 #include "wsn.h"
 #include "cipher.h"
-void get_neighbor_count(int coord[2], int* neighbor_count) {
+
+// The time taken to encrypt/decrypt a message before sending or after receiving. The use of OpenMP here should demonstrate improvements in encryption and/or decryption processing time.
+// - Number of messages passed throughout the network
+// - Number of events occurred throughout the network
+// - Details of nodes involved in each of the events (reference node and its adjacent nodes)
+
+struct event {
+	uint8_t num;
+    int n_times;
+    int iteration;
+	double encryption_time;
+	double decryption_time;
+    int reference_rank;
+	int* occur_on_ranks;
+    time_t timestamp;
+    
+};
+
+struct logger {
+	int encrypt_t;
+	int decryp_t;
+	int n_message;
+	int n_event;
+	int* reference_node;
+	int** adjacent_node;
+};
+
+void print_event(struct event e) {
+    printf("event num %d detected on rank (local) %d\nencryption time taken: %lf seconds\ndecryption time taken: %lf seconds\ntime: %siteration: %d\n",e.num, e.reference_rank, e.encryption_time, e.decryption_time, asctime(localtime(&e.timestamp)), e.iteration);
+    printf("number generated %d times on rank: ", e.n_times);
+    for (int i=0;i<e.n_times;i++) {
+        printf("%d ", e.occur_on_ranks[i]);
+    }
+    printf("\n\n");
+    
+}
+
+
+static void get_neighbor_count(int coord[2], int* neighbor_count) {
 	int *neibhbor_count;
 	// MPI_Cart_shift()	
     *neighbor_count = 4;
@@ -28,10 +66,13 @@ void get_neighbor_count(int coord[2], int* neighbor_count) {
     }
 }
 
-
 int main(int argc, char *argv[])
 {
+    struct event e;
+    
+    double tick, encryption_time, decryption_time, t0;
     int global_size, global_rank, size, rank, nneighbor;
+    
     uint8_t random_num;
     uint8_t* message;
     MPI_Comm node_comm;
@@ -46,6 +87,7 @@ int main(int argc, char *argv[])
     MPI_Request trash_req;
 
     MPI_Init(&argc, &argv);
+    tick = MPI_Wtick();
 //	MPI_Type_contiguous(MESSAGE_LEN, MPI_UINT8_T, &message_type);
 //	MPI_Type_commit(&message_type);
     uint8_t* neighbor_result;
@@ -76,48 +118,99 @@ int main(int argc, char *argv[])
 
         // setup different random number seed on different rank
         srand(time(NULL)+rank);
-        random_num = (uint8_t)(rand() & ((1 << N_BIT_RAND) - 1));
-        printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
 
-        // add padding of zeros following random num
-        message = (uint8_t*)calloc(MESSAGE_LEN, 1);
-        memcpy(message, &random_num, 1);
-
-        encrypt(message, message, MESSAGE_LEN, key, KEY_SIZE);
-        
-
+        message = calloc(MESSAGE_LEN, 1);
         MPI_Alloc_mem((MPI_Aint)(nneighbor * MESSAGE_LEN), MPI_INFO_NULL, &neighbor_result);
         MPI_Alloc_mem((MPI_Aint)(sizeof(MPI_Request) * 4), MPI_INFO_NULL, &reqs);
         MPI_Alloc_mem(nneighbor, MPI_INFO_NULL, &neighbor_rank);
-		
-		// similar implementation with MPI_Ineighbor_alltoall
-        for (int i=0, dim=0; dim<2; ++dim) {
-            MPI_Cart_shift(node_comm, dim, 1, &r0, &r1);
-            if (r0 >= 0) {
-                MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r0, 0, node_comm, &trash_req);
-                MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r0, MPI_ANY_TAG, node_comm, &reqs[i]);
-                neighbor_rank[i] = r0;
-                i++;
+
+        // same as power(2, nbit), but more efficient
+        int upperbound = 1 << N_BIT_RAND;
+        int *num_recv = calloc(upperbound, sizeof(int));
+        e.occur_on_ranks = malloc(nneighbor);
+
+        for (int current_i = 0; current_i < N_ITERATION; current_i++)
+        {
+
+            random_num = (uint8_t)(rand() & ((1 << N_BIT_RAND) - 1));
+            printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
+
+            // add padding of zeros following random num
+            
+            memcpy(message, &random_num, 1);
+
+            t0 = MPI_Wtime(); 
+            encrypt(message, message, MESSAGE_LEN, key, KEY_SIZE);
+            encryption_time = MPI_Wtime() - t0;
+
+            for (int i=0, dim=0; dim<2; ++dim) {
+                MPI_Cart_shift(node_comm, dim, 1, &r0, &r1);
+                if (r0 >= 0) {
+                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r0, 0, node_comm, &trash_req);
+                    MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r0, MPI_ANY_TAG, node_comm, &reqs[i]);
+                    neighbor_rank[i] = r0;
+                    i++;
+                }
+                if (r1 >= 0) {
+                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r1, 0, node_comm, &trash_req);
+                    MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r1, MPI_ANY_TAG, node_comm, &reqs[i]);
+                    neighbor_rank[i] = r1;
+                    i++;
+                }
             }
-            if (r1 >= 0) {
-                MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r1, 0, node_comm, &trash_req);
-                MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r1, MPI_ANY_TAG, node_comm, &reqs[i]);
-                neighbor_rank[i] = r1;
-                i++;
+            MPI_Waitall(nneighbor, reqs, MPI_STATUSES_IGNORE);
+
+
+            t0 = MPI_Wtime();
+            decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN, key, KEY_SIZE);
+            decryption_time = MPI_Wtime() - t0;
+
+
+            // int event_occured = 0;
+            
+            for (int i=0;i <nneighbor; i++) {
+                // printf("rank %d received %d from %d\n", rank, neighbor_result[i*MESSAGE_LEN], neighbor_rank[i]);
+                num_recv[(int)neighbor_result[i*MESSAGE_LEN]] ++; 
             }
-        }
-        MPI_Waitall(nneighbor, reqs, MPI_STATUSES_IGNORE);
-        decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN, key, KEY_SIZE);
-        
-        for (int i=0;i <nneighbor; i++) {
-            printf("rank %d received %d from %d\n", rank, neighbor_result[i*MESSAGE_LEN], neighbor_rank[i]);
+            // MPI_Barrier(node_comm);
+            for (int i=0;i < upperbound; i++) {
+                // printf("num_recv[i]=%d on rank %d\n", i, num_recv[i], rank);
+                if (num_recv[i] >= RAND_TH)
+                {
+                    e.num = (uint8_t)i;
+                    e.n_times = num_recv[i];
+                    e.iteration = current_i;
+                    e.reference_rank = rank;
+                    e.encryption_time = encryption_time;
+                    e.decryption_time = decryption_time;
+                    e.timestamp = time(NULL);
+
+                    
+                    // int k=0;
+                    // printf("nneighbor = %d\n", nneighbor);
+                    for (int j = 0, k=0; j < nneighbor; j++)
+                    {
+                        // printf("k = %d, j = %d, neighbor_result[%d * MESSAGE_LEN] = %d\n", k, j, i, neighbor_result[i*MESSAGE_LEN]);
+                        if ((int)neighbor_result[j * MESSAGE_LEN] == i)
+                        {
+                            e.occur_on_ranks[k++] = neighbor_rank[j];
+                            // printf("k=%d\n", k);
+                        }
+                    }
+                    print_event(e);
+                }
+
+                // clean up for next iteration
+                num_recv[i] = 0;
+            }
+            usleep(1000 * INTERVAL);
         }
 		MPI_Comm_free(&node_comm);
         free(message);
-    } else {
-		printf("Rank of base station is %d\n", global_rank);
-	}
-    
+    }
     MPI_Finalize();
     return(0);
+    
 }
+
+
