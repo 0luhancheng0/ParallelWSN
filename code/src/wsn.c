@@ -18,11 +18,11 @@ struct event {
 	uint8_t num;
     int n_times;
     int iteration;
-	double encryption_time;
-	double decryption_time;
     int reference_rank;
-	int* occur_on_ranks;
-    time_t timestamp;
+    double encryption_time;
+	double decryption_time;
+	int occur_on_ranks[4];
+    long int timestamp;
     
 };
 
@@ -69,6 +69,11 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
 int main(int argc, char *argv[])
 {
     struct event e;
+    // create mpi struct type for event
+    // http://www.catb.org/esr/structure-packing/
+    // int blocklengths[] = {1, 4, 4, 4, 8, 8, }
+
+    // MPI_Type_struct(8, );
     
     double tick, encryption_time, decryption_time, t0;
     int global_size, global_rank, size, rank, nneighbor;
@@ -127,7 +132,7 @@ int main(int argc, char *argv[])
         // same as power(2, nbit), but more efficient
         int upperbound = 1 << N_BIT_RAND;
         int *num_recv = calloc(upperbound, sizeof(int));
-        e.occur_on_ranks = malloc(nneighbor);
+        // e.occur_on_ranks = malloc(nneighbor);
 
         for (int current_i = 0; current_i < N_ITERATION; current_i++)
         {
@@ -207,6 +212,8 @@ int main(int argc, char *argv[])
         }
 		MPI_Comm_free(&node_comm);
         free(message);
+    } else {
+        printf("bask rank is %d\n", global_rank);
     }
     MPI_Finalize();
     return(0);
