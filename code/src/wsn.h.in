@@ -9,10 +9,10 @@
 #define N_BIT_RAND 1
 
 // run N_INTERATION number times
-#define N_ITERATION 100
+#define N_ITERATION 1
 
 // run sleep ITERVAL millisecond each iteration
-#define INTERVAL 10
+#define INTERVAL 1
 
 // length of message in bytes after padding precending 0s must be greater than N_BIT_RAND / 8. IT ALSO NEED TO BE MULTIPLE OF KEYSIZE
 #define MESSAGE_LEN 1024

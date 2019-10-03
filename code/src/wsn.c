@@ -15,14 +15,14 @@
 // - Details of nodes involved in each of the events (reference node and its adjacent nodes)
 
 struct event {
-	uint8_t num;
+	int occur_on_ranks[4];
+    double encryption_time;
+	double decryption_time;
+    long int timestamp;
     int n_times;
     int iteration;
     int reference_rank;
-    double encryption_time;
-	double decryption_time;
-	int occur_on_ranks[4];
-    long int timestamp;
+	uint8_t num;
     
 };
 
@@ -66,12 +66,21 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
     }
 }
 
+
 int main(int argc, char *argv[])
 {
     struct event e;
     // create mpi struct type for event
     // http://www.catb.org/esr/structure-packing/
-    // int blocklengths[] = {1, 4, 4, 4, 8, 8, }
+    int event_property_count = 7;
+    int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1};
+    
+    MPI_Aint displacement[] = {0, 16, 24, 32, 40, 44, 48, 52};
+    MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_UINT8_T};
+    MPI_Datatype my_mpi_event_type;
+
+    
+    struct event *event_recv_buff;
 
     // MPI_Type_struct(8, );
     
@@ -92,6 +101,9 @@ int main(int argc, char *argv[])
     MPI_Request trash_req;
 
     MPI_Init(&argc, &argv);
+    MPI_Type_create_struct(event_property_count, blocklengths, displacement, types, &my_mpi_event_type);
+    MPI_Type_commit(&my_mpi_event_type);
+    
     tick = MPI_Wtick();
 //	MPI_Type_contiguous(MESSAGE_LEN, MPI_UINT8_T, &message_type);
 //	MPI_Type_commit(&message_type);
@@ -202,7 +214,8 @@ int main(int argc, char *argv[])
                             // printf("k=%d\n", k);
                         }
                     }
-                    print_event(e);
+                    // print_event(e);
+                    MPI_Send(&e, 1, my_mpi_event_type, BASERANK, 0, MPI_COMM_WORLD);
                 }
 
                 // clean up for next iteration
@@ -214,6 +227,12 @@ int main(int argc, char *argv[])
         free(message);
     } else {
         printf("bask rank is %d\n", global_rank);
+        event_recv_buff = malloc(sizeof(struct event) * X_SIZE * Y_SIZE);
+
+
+        MPI_Recv(event_recv_buff, 1, my_mpi_event_type, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, MPI_STATUSES_IGNORE);
+        print_event(*event_recv_buff);
+        // printf("printed by base rank\n");
     }
     MPI_Finalize();
     return(0);
