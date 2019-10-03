@@ -18,7 +18,7 @@
 #define MESSAGE_LEN 1024
 
 // threshold for random number, event will be reported when occurence is greater or equal to this number, it should be greater than half of neighbor counts on any rank to make sure no more that one event is to be reported
-#define RAND_TH 3
+#define RAND_TH 1
 
 
 
