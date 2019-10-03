@@ -35,7 +35,7 @@ struct logger {
 	int** adjacent_node;
 };
 
-void print_event(struct event e) {
+static void print_event(struct event e) {
     printf("event num %d detected on rank (local) %d\nencryption time taken: %lf seconds\ndecryption time taken: %lf seconds\ntime: %siteration: %d\n",e.num, e.reference_rank, e.encryption_time, e.decryption_time, asctime(localtime(&e.timestamp)), e.iteration);
     printf("number generated %d times on rank: ", e.n_times);
     for (int i=0;i<e.n_times;i++) {
@@ -70,29 +70,34 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
 int main(int argc, char *argv[])
 {
     struct event e;
+
     // create mpi struct type for event
-    // http://www.catb.org/esr/structure-packing/
-    int event_property_count = 7;
-    int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1};
-    
-    MPI_Aint displacement[] = {0, 16, 24, 32, 40, 44, 48, 52};
-    MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_UINT8_T};
+    const int event_property_count = 7;
+    const int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1};
+    const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 44, 48, 52};
+    const MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_UINT8_T};
     MPI_Datatype my_mpi_event_type;
 
     
-    struct event *event_recv_buff;
+    struct event event_recv_buff[X_SIZE * Y_SIZE+1];
+	const int succeed_signal = 0;
+	const int INTERNODE_COMM_TAG=0;
+	const int BASE_COMM_TAG=1;
+	const int SIMULATION_COMPLETED_SIGNAL = 2;
+	int simulation_completion[X_SIZE * Y_SIZE+1] = {-1};
+	MPI_Request base_comm_reqs[X_SIZE * Y_SIZE+1];
+	MPI_Request simulation_complete_reqs[X_SIZE * Y_SIZE+1];
 
-    // MPI_Type_struct(8, );
-    
     double tick, encryption_time, decryption_time, t0;
     int global_size, global_rank, size, rank, nneighbor;
     
     uint8_t random_num;
     uint8_t* message;
     MPI_Comm node_comm;
-    int r0, r1;
+    int r0, r1, recv_node;
     const int baserank_list[1] = {BASERANK};
-    int dim[2] = {X_SIZE, Y_SIZE}, period[2] = {0}, coord[2], reorder = 0;
+    const int dim[2] = {X_SIZE, Y_SIZE}, period[2] = {0}, reorder = 0;
+	int coord[2];
     int* neighbor_rank;
 //	MPI_Datatype message_type;
 	
@@ -105,8 +110,6 @@ int main(int argc, char *argv[])
     MPI_Type_commit(&my_mpi_event_type);
     
     tick = MPI_Wtick();
-//	MPI_Type_contiguous(MESSAGE_LEN, MPI_UINT8_T, &message_type);
-//	MPI_Type_commit(&message_type);
     uint8_t* neighbor_result;
     MPI_Comm_size(MPI_COMM_WORLD, &global_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &global_rank);
@@ -163,14 +166,14 @@ int main(int argc, char *argv[])
             for (int i=0, dim=0; dim<2; ++dim) {
                 MPI_Cart_shift(node_comm, dim, 1, &r0, &r1);
                 if (r0 >= 0) {
-                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r0, 0, node_comm, &trash_req);
-                    MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r0, MPI_ANY_TAG, node_comm, &reqs[i]);
+                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, &trash_req);
+                    MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
                     neighbor_rank[i] = r0;
                     i++;
                 }
                 if (r1 >= 0) {
-                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r1, 0, node_comm, &trash_req);
-                    MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r1, MPI_ANY_TAG, node_comm, &reqs[i]);
+                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, &trash_req);
+                    MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
                     neighbor_rank[i] = r1;
                     i++;
                 }
@@ -182,16 +185,10 @@ int main(int argc, char *argv[])
             xor_decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN, key, KEY_SIZE);
             decryption_time = MPI_Wtime() - t0;
 
-
-            // int event_occured = 0;
-            
             for (int i=0;i <nneighbor; i++) {
-                // printf("rank %d received %d from %d\n", rank, neighbor_result[i*MESSAGE_LEN], neighbor_rank[i]);
                 num_recv[(int)neighbor_result[i*MESSAGE_LEN]] ++; 
             }
-            // MPI_Barrier(node_comm);
             for (int i=0;i < upperbound; i++) {
-                // printf("num_recv[i]=%d on rank %d\n", i, num_recv[i], rank);
                 if (num_recv[i] >= RAND_TH)
                 {
                     e.num = (uint8_t)i;
@@ -201,21 +198,15 @@ int main(int argc, char *argv[])
                     e.encryption_time = encryption_time;
                     e.decryption_time = decryption_time;
                     e.timestamp = time(NULL);
-
-                    
-                    // int k=0;
-                    // printf("nneighbor = %d\n", nneighbor);
                     for (int j = 0, k=0; j < nneighbor; j++)
                     {
-                        // printf("k = %d, j = %d, neighbor_result[%d * MESSAGE_LEN] = %d\n", k, j, i, neighbor_result[i*MESSAGE_LEN]);
                         if ((int)neighbor_result[j * MESSAGE_LEN] == i)
                         {
                             e.occur_on_ranks[k++] = neighbor_rank[j];
-                            // printf("k=%d\n", k);
                         }
                     }
                     // print_event(e);
-                    MPI_Send(&e, 1, my_mpi_event_type, BASERANK, 0, MPI_COMM_WORLD);
+                    MPI_Send(&e, 1, my_mpi_event_type, BASERANK, BASE_COMM_TAG, MPI_COMM_WORLD);
                 }
 
                 // clean up for next iteration
@@ -223,15 +214,41 @@ int main(int argc, char *argv[])
             }
             usleep(1000 * INTERVAL);
         }
+		MPI_Send(&succeed_signal, 1, MPI_INT, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
+		printf("node %d completed\n", global_rank);
 		MPI_Comm_free(&node_comm);
         free(message);
     } else {
         printf("bask rank is %d\n", global_rank);
-        event_recv_buff = malloc(sizeof(struct event) * X_SIZE * Y_SIZE);
+		// base_comm_reqs = malloc(sizeof(MPI_Request) * X_SIZE * Y_SIZE);
+        // event_recv_buff = malloc(sizeof(struct event) * X_SIZE * Y_SIZE);
+			
+		// setup inital recv 
+		for (int i=0;i<global_size;i++) {
+			if (i!=BASERANK) {
+				MPI_Irecv(&event_recv_buff[i], 1, my_mpi_event_type, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
+				MPI_Irecv(&simulation_completion[i], 1, MPI_INT, i, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD, &simulation_complete_reqs[i]);
+			} else {
+				base_comm_reqs[i] = MPI_REQUEST_NULL;
+				simulation_complete_reqs[i] = MPI_REQUEST_NULL;
+			}
+		}
+		int current_recv_rank;
+		int simulation_all_completed_flag = 0;
 
+		while (!simulation_all_completed_flag) {
+			MPI_Waitany(global_size, base_comm_reqs, &current_recv_rank, MPI_STATUS_IGNORE);
+			print_event(event_recv_buff[current_recv_rank]);
+			MPI_Irecv(&event_recv_buff[current_recv_rank], 1, my_mpi_event_type, current_recv_rank, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[current_recv_rank]);
+			usleep(1000 * INTERVAL * 2);	
+			MPI_Testall(global_size, simulation_complete_reqs, &simulation_all_completed_flag, MPI_STATUSES_IGNORE);
 
-        MPI_Recv(event_recv_buff, 1, my_mpi_event_type, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, MPI_STATUSES_IGNORE);
-        print_event(*event_recv_buff);
+		}
+		printf("simulation completed !!!\n");
+
+		
+			
+        //print_event(*event_recv_buff);
         // printf("printed by base rank\n");
     }
     MPI_Finalize();

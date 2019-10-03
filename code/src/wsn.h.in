@@ -9,7 +9,7 @@
 #define N_BIT_RAND 1
 
 // run N_INTERATION number times
-#define N_ITERATION 1
+#define N_ITERATION 5
 
 // run sleep ITERVAL millisecond each iteration
 #define INTERVAL 1
