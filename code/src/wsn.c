@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
             memcpy(message, &random_num, 1);
 
             t0 = MPI_Wtime(); 
-            encrypt(message, message, MESSAGE_LEN, key, KEY_SIZE);
+            xor_encrypt(message, message, MESSAGE_LEN, key, KEY_SIZE);
             encryption_time = MPI_Wtime() - t0;
 
             for (int i=0, dim=0; dim<2; ++dim) {
@@ -179,7 +179,7 @@ int main(int argc, char *argv[])
 
 
             t0 = MPI_Wtime();
-            decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN, key, KEY_SIZE);
+            xor_decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN, key, KEY_SIZE);
             decryption_time = MPI_Wtime() - t0;
 
 

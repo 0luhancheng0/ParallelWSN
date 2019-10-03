@@ -7,6 +7,6 @@ static const uint8_t key[16] =  { (uint8_t) 0x2b, (uint8_t) 0x7e, (uint8_t) 0x15
 // IV
 
 
-// encrypt and decrypt are the same function, which xor key with first argument then store result in second argument
-void encrypt(uint8_t* plaintext, uint8_t* ciphertext, int message_length, const uint8_t* k, int k_size);
-void decrypt(uint8_t* ciphertext, uint8_t* plaintext, int message_length, const uint8_t* k, int k_size);
+// xor_encrypt and xor_decrypt are the same function, which xor key with first argument then store result in second argument
+void xor_encrypt(uint8_t* plaintext, uint8_t* ciphertext, int message_length, const uint8_t* k, int k_size);
+void xor_decrypt(uint8_t* ciphertext, uint8_t* plaintext, int message_length, const uint8_t* k, int k_size);
