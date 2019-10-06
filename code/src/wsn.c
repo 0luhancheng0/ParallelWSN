@@ -42,9 +42,7 @@ static void print_event(struct event e) {
         printf("%d ", e.occur_on_ranks[i]);
     }
     printf("\n\n");
-    
 }
-
 
 static void get_neighbor_count(int coord[2], int* neighbor_count) {
 	int *neibhbor_count;
@@ -65,7 +63,18 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
         *neighbor_count -= 1;
     }
 }
-
+// 
+// struct event {
+// 	int occur_on_ranks[4];
+//     double encryption_time;
+// 	double decryption_time;
+//     long int timestamp;
+//     int n_times;
+//     int iteration;
+//     int reference_rank;
+// 	uint8_t num;
+//     
+// };
 
 int main(int argc, char *argv[])
 {
@@ -87,10 +96,8 @@ int main(int argc, char *argv[])
 	int simulation_completion[X_SIZE * Y_SIZE+1] = {-1};
 	MPI_Request base_comm_reqs[X_SIZE * Y_SIZE+1];
 	MPI_Request simulation_complete_reqs[X_SIZE * Y_SIZE+1];
-
     double tick, encryption_time, decryption_time, t0;
     int global_size, global_rank, size, rank, nneighbor;
-    
     uint8_t random_num;
     uint8_t* message;
     MPI_Comm node_comm;
@@ -99,8 +106,6 @@ int main(int argc, char *argv[])
     const int dim[2] = {X_SIZE, Y_SIZE}, period[2] = {0}, reorder = 0;
 	int coord[2];
     int* neighbor_rank;
-//	MPI_Datatype message_type;
-	
     MPI_Group global_group, node_group;
     MPI_Request *reqs;
     MPI_Request trash_req;
@@ -124,7 +129,6 @@ int main(int argc, char *argv[])
     MPI_Group_excl(global_group, 1, baserank_list, &node_group);
 
     if (global_rank != BASERANK) {
-
 
         // create group for inter node communication
         MPI_Comm_create_group(MPI_COMM_WORLD, node_group, 0, &node_comm);
@@ -153,7 +157,7 @@ int main(int argc, char *argv[])
         {
 
             random_num = (uint8_t)(rand() & ((1 << N_BIT_RAND) - 1));
-            printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
+            // printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
 
             // add padding of zeros following random num
             
@@ -184,14 +188,18 @@ int main(int argc, char *argv[])
             t0 = MPI_Wtime();
             xor_decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN, key, KEY_SIZE);
             decryption_time = MPI_Wtime() - t0;
+			// for (int i=0;i<nneighbor;i++) { 
+			// 	printf("rank %d received %d from rank %d\n", rank, (int)neighbor_result[i*MESSAGE_LEN], neighbor_rank[i]);
+			// }
 
             for (int i=0;i <nneighbor; i++) {
                 num_recv[(int)neighbor_result[i*MESSAGE_LEN]] ++; 
             }
             for (int i=0;i < upperbound; i++) {
+				printf("rank %d, num_recv[%d]=%d\n", rank, i, num_recv[i]);
                 if (num_recv[i] >= RAND_TH)
                 {
-                    e.num = (uint8_t)i;
+                    e.num = i;
                     e.n_times = num_recv[i];
                     e.iteration = current_i;
                     e.reference_rank = rank;
@@ -215,15 +223,9 @@ int main(int argc, char *argv[])
             usleep(1000 * INTERVAL);
         }
 		MPI_Send(&succeed_signal, 1, MPI_INT, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
-		printf("node %d completed\n", global_rank);
 		MPI_Comm_free(&node_comm);
         free(message);
     } else {
-        printf("bask rank is %d\n", global_rank);
-		// base_comm_reqs = malloc(sizeof(MPI_Request) * X_SIZE * Y_SIZE);
-        // event_recv_buff = malloc(sizeof(struct event) * X_SIZE * Y_SIZE);
-			
-		// setup inital recv 
 		for (int i=0;i<global_size;i++) {
 			if (i!=BASERANK) {
 				MPI_Irecv(&event_recv_buff[i], 1, my_mpi_event_type, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
@@ -244,16 +246,9 @@ int main(int argc, char *argv[])
 			MPI_Testall(global_size, simulation_complete_reqs, &simulation_all_completed_flag, MPI_STATUSES_IGNORE);
 
 		}
-		printf("simulation completed !!!\n");
-
-		
-			
-        //print_event(*event_recv_buff);
-        // printf("printed by base rank\n");
     }
     MPI_Finalize();
     return(0);
-    
 }
 
 
