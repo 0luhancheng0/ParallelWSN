@@ -22,9 +22,8 @@ struct event {
     long int timestamp;
     int n_times;
     int iteration;
-    int reference_rank;
 	int num;
-    
+    int reference_rank;
 };
 
 struct logger {
@@ -80,7 +79,6 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
 int main(int argc, char *argv[])
 {
     struct event e;
-
     // create mpi struct type for event
     const int event_property_count = 7;
     const int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1};
@@ -160,8 +158,8 @@ int main(int argc, char *argv[])
         for (int current_i = 0; current_i < N_ITERATION; current_i++)
         {
 
-            // random_num = random() & ((1 << N_BIT_RAND) - 1);
-            random_num = 3;
+            random_num = (int)(random() & ((1 << N_BIT_RAND) - 1));
+            // random_num = 2;
             // printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
 
             // add padding of zeros following random num
@@ -241,8 +239,12 @@ int main(int argc, char *argv[])
     } else {
         // struct event p;
         // MPI_Recv(&p, 1, my_mpi_event_type, 2, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        // print_event(p);
+        // // print_event(p);
+        // printf("test elem %p\n", &p.reference_rank);
+        // int* t = &p.num;
         // MPI_Recv(&p, 1, my_mpi_event_type, 5, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        // printf("test elem %p\n", &p.num);
+        // printf("t=%d\n",*t);
         // print_event(p);
         for (int i=0;i<global_size;i++) {
 			if (i!=BASERANK) {
@@ -259,8 +261,6 @@ int main(int argc, char *argv[])
 		MPI_Status status[X_SIZE*Y_SIZE+1];
         MPI_Status single_status;
         int remain_rank_num = global_size-1;
-
-
 
         while (!simulation_all_completed_flag) {
             MPI_Waitany(global_size*2, base_comm_reqs, &current_recv_rank, &single_status);
