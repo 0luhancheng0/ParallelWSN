@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <memory.h>
 #include <stdint.h>
+#include <string.h>
 #include <stdlib.h>
 #include <time.h>
 #include <mpi.h>
@@ -8,33 +9,24 @@
 #include <unistd.h>
 #include "wsn.h"
 #include "cipher.h"
-#include <assert.h>
+#include <omp.h>
 
 // The time taken to encrypt/decrypt a message before sending or after receiving. The use of OpenMP here should demonstrate improvements in encryption and/or decryption processing time.
 // - Number of messages passed throughout the network
 // - Number of events occurred throughout the network
 // - Details of nodes involved in each of the events (reference node and its adjacent nodes)
 
-struct event {
-	int occur_on_ranks[4];
+struct event
+{
+    int occur_on_ranks[4];
     double encryption_time;
-	double decryption_time;
+    double decryption_time;
     long int timestamp;
     int n_times;
     int iteration;
     int num;
     int reference_rank;
 };
-
-struct logger {
-	int encrypt_time;
-	int decryp_time;
-	int n_message;
-	int n_event;
-	int* reference_node;
-	int** adjacent_node;
-};
-
 static void print_event(struct event e) {
     printf("event num %d detected on rank (local) %d\nencryption time taken: %lf seconds\ndecryption time taken: %lf seconds\ntime: %siteration: %d\n",e.num, e.reference_rank, e.encryption_time, e.decryption_time, asctime(localtime(&e.timestamp)), e.iteration);
     printf("number generated %d times on rank: ", e.n_times);
@@ -63,32 +55,12 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
         *neighbor_count -= 1;
     }
 }
-// 
-// struct event {
-// 	int occur_on_ranks[4];
-//     double encryption_time;
-// 	double decryption_time;
-//     long int timestamp;
-//     int n_times;
-//     int iteration;
-//     int reference_rank;
-// 	uint8_t num;
-//     
-// };
-// struct event
-// {
-//     int occur_on_ranks[4];
-//     double encryption_time;
-//     double decryption_time;
-//     long int timestamp;
-//     int n_times;
-//     int iteration;
-//     int num;
-//     int reference_rank;
-// };
 int main(int argc, char *argv[])
 {
     struct event e;
+    struct event *all_events;
+    MPI_Status single_status;
+
     // create mpi struct type for event
     const int event_property_count = 8;
     const int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1, 1};
@@ -170,8 +142,8 @@ int main(int argc, char *argv[])
         for (int current_i = 0; current_i < N_ITERATION; current_i++)
         {
 
-            // random_num = (int)(random() & ((1 << N_BIT_RAND) - 1));
-            random_num = 0;
+            random_num = (int)(random() & ((1 << N_BIT_RAND) - 1));
+            // random_num = 1;
             // printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
 
             // add padding of zeros following random num
@@ -245,8 +217,14 @@ int main(int argc, char *argv[])
 		MPI_Comm_free(&node_comm);
         free(message);
     } else {
-        for (int i=0;i<global_size;i++) {
-			if (i!=BASERANK) {
+        int max_possible_events = X_SIZE*Y_SIZE*N_ITERATION;
+        int event_storage_p=0;
+        int total_event_num = 0;
+        all_events = malloc(max_possible_events * sizeof(struct event));
+        // struct event *current_event_p = all_events;
+        for (int i = 0; i < global_size; i++)
+        {
+            if (i!=BASERANK) {
 				MPI_Irecv(&event_recv_buff[i], 1, my_mpi_event_type, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
 				MPI_Irecv(&simulation_completion[i], 1, MPI_INT, i, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD, &base_comm_reqs[i+global_size]);
 			} else {
@@ -255,11 +233,11 @@ int main(int argc, char *argv[])
 			}
 		}
 		int current_recv_rank;
-        int tmpflag;
 		int simulation_all_completed_flag = 0;
-		MPI_Status status[X_SIZE*Y_SIZE+1];
-        MPI_Status single_status;
+        
         int remain_rank_num = global_size-1;
+        double average_encryption_time = 0;
+        double average_decryption_time = 0;
 
         while (!simulation_all_completed_flag) {
             MPI_Waitany(global_size*2, base_comm_reqs, &current_recv_rank, &single_status);
@@ -272,11 +250,64 @@ int main(int argc, char *argv[])
                     simulation_all_completed_flag = 1;
                 }
             } else {
-                print_event(event_recv_buff[current_recv_rank]);
-                printf("event num %d detected on rank %d\n", event_recv_buff[current_recv_rank].num, current_recv_rank);
+                // print_event(event_recv_buff[current_recv_rank]);
+                memcpy(&all_events[event_storage_p++], &event_recv_buff[current_recv_rank], sizeof(struct event));
+                total_event_num++;
+                average_encryption_time += event_recv_buff[current_recv_rank].encryption_time;
+                average_decryption_time += event_recv_buff[current_recv_rank].decryption_time;
+                // printf("event num %d detected on rank %d\n", event_recv_buff[current_recv_rank].num, current_recv_rank);
                 MPI_Irecv(&event_recv_buff[current_recv_rank], 1, my_mpi_event_type, current_recv_rank, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[current_recv_rank]);
+                // memcpy();
             }
 		}
+        average_encryption_time = average_encryption_time / total_event_num;
+        average_decryption_time = average_decryption_time / total_event_num;
+        // for (int i=0;i<total_event_num;i++) {
+        //     print_event(all_events[i]);
+        // }
+        char filename[] = "log.txt";
+        FILE *f = fopen(filename, "w");
+        char header[200] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
+        ;
+        int header_p = strlen(header);
+        // char summary[100];
+        // int num_threads = omp_get_num_threads();
+        // int message_passing_num_single_event = ;
+        header_p += sprintf(header + header_p, "network configuration overview: \n");
+        header_p += sprintf(header + header_p, "Network have %d nodes in X dimension and %d nodes in Y dimension\n", X_SIZE, Y_SIZE);
+        header_p += sprintf(header + header_p, "The size of random number is %d bits, which indicate event number is bound by range [0, %d]\n", N_BIT_RAND, 1 << N_BIT_RAND);
+        header_p += sprintf(header + header_p, "average encryption time : %lf seconds\naverage decryption time : %lf seconds\n", average_encryption_time, average_decryption_time);
+        header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
+        header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
+        header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
+        header_p += sprintf(header + header_p, "details of nodes involved in communication:\n");
+
+        char *event_details_log = malloc(total_event_num*sizeof(char)*100);
+        int event_p = 0;
+        int perv_interation = 0;
+        // int current_iteration = 0;
+        for (int i=0;i<total_event_num;i++) {
+            if (all_events[i].iteration != perv_interation) {
+                event_p += sprintf(event_details_log + event_p, "Iteration %d\n\n", all_events[i].iteration);
+                perv_interation = all_events[i].iteration;
+            }
+            event_p += sprintf(event_details_log + event_p, "event number %d detected on rank (local) %d\n", all_events[i].num, all_events[i].reference_rank);
+            event_p += sprintf(event_details_log + event_p, "adjacent nodes are : ");
+            for (int j=0;j<all_events[i].n_times;j++) {
+                event_p += sprintf(event_details_log + event_p, "%d ", all_events[i].occur_on_ranks[j]);
+            }
+            event_p += sprintf(event_details_log + event_p, "\n");
+
+            // add more stuff here
+            event_p += sprintf(event_details_log + event_p, "\n");
+        }
+
+        fwrite(header, sizeof(char), header_p, f);
+        fwrite(event_details_log, sizeof(char), event_p, f);
+        
+        fclose(f);
+
+
     }
     MPI_Finalize();
     return(0);

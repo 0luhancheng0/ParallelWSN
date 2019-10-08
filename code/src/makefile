@@ -1,5 +1,5 @@
 
-all: clean run
+all:  run
 install_dir=./WSN_INSTALL
 X_SIZE?=2
 Y_SIZE?=3

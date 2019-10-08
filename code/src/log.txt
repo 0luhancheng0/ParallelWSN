@@ -1,0 +1,52 @@
+Event detection in a fully distributed wireless sensor network - WSN
+
+network configuration overview: 
+Network have 2 nodes in X dimension and 3 nodes in Y dimension
+The size of random number is 1 bits, which indicate event number is bound by range [0, 2]
+average encryption time : 0.000009 seconds
+average decryption time : 0.000017 seconds
+number of message pass between base station and nodes : 14
+number of message passing happened among nodes: 280
+total events detected: 8
+
+details of nodes involved in communication:
+Iteration 1
+
+event number 1 detected on rank (local) 1
+adjacent nodes are : 4 0 2 
+
+Iteration 6
+
+event number 0 detected on rank (local) 4
+adjacent nodes are : 1 3 5 
+
+Iteration 8
+
+event number 0 detected on rank (local) 1
+adjacent nodes are : 4 0 2 
+
+Iteration 11
+
+event number 0 detected on rank (local) 4
+adjacent nodes are : 1 3 5 
+
+Iteration 13
+
+event number 1 detected on rank (local) 1
+adjacent nodes are : 4 0 2 
+
+Iteration 14
+
+event number 1 detected on rank (local) 1
+adjacent nodes are : 4 0 2 
+
+Iteration 15
+
+event number 0 detected on rank (local) 1
+adjacent nodes are : 4 0 2 
+
+Iteration 18
+
+event number 1 detected on rank (local) 1
+adjacent nodes are : 4 0 2 
+
