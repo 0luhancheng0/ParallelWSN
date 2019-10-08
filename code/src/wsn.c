@@ -22,7 +22,7 @@ struct event {
     long int timestamp;
     int n_times;
     int iteration;
-	int num;
+    int num;
     int reference_rank;
 };
 
@@ -75,16 +75,28 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
 // 	uint8_t num;
 //     
 // };
-
+// struct event
+// {
+//     int occur_on_ranks[4];
+//     double encryption_time;
+//     double decryption_time;
+//     long int timestamp;
+//     int n_times;
+//     int iteration;
+//     int num;
+//     int reference_rank;
+// };
 int main(int argc, char *argv[])
 {
     struct event e;
     // create mpi struct type for event
-    const int event_property_count = 7;
-    const int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1};
-    const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 44, 48, 52};
+    const int event_property_count = 8;
+    const int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1, 1};
+    // const MPI_Aint displacement[] = {0, &e.encryption_time - &e.occur_on_ranks[0], &e.decryption_time - &e.occur_on_ranks[0], &e.timestamp - &e.occur_on_ranks[0],
+    //                                  &e.n_times - &e.occur_on_ranks[0], &e.iteration - &e.occur_on_ranks[0], &e.num - &e.occur_on_ranks[0], &e.reference_rank - &e.occur_on_ranks[0]};
     // printf("&e=%p, &e.num=%p, sizeof(e)=%lu\n", &e, &e.num, sizeof(e));
-    const MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT};
+    const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 44, 48, 52, sizeof(e)};
+    const MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT, MPI_UB};
     MPI_Datatype my_mpi_event_type;
 
     
@@ -158,8 +170,8 @@ int main(int argc, char *argv[])
         for (int current_i = 0; current_i < N_ITERATION; current_i++)
         {
 
-            random_num = (int)(random() & ((1 << N_BIT_RAND) - 1));
-            // random_num = 2;
+            // random_num = (int)(random() & ((1 << N_BIT_RAND) - 1));
+            random_num = 0;
             // printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
 
             // add padding of zeros following random num
@@ -199,7 +211,6 @@ int main(int argc, char *argv[])
                 num_recv[(int)neighbor_result[i*MESSAGE_LEN]] ++; 
             }
             for (int i=0;i < upperbound; i++) {
-				// printf("rank %d, num_recv[%d]=%d\n", rank, i, num_recv[i]);
                 if (num_recv[i] >= RAND_TH)
                 {
                     e.num = i;
@@ -216,9 +227,6 @@ int main(int argc, char *argv[])
                             e.occur_on_ranks[k++] = neighbor_rank[j];
                         }
                     }
-                    // print_event(e);
-                    // print_event(e);
-                    // printf("%d sent by %d\n", e.num, rank);
                     
                     MPI_Send(&e, 1, my_mpi_event_type, BASERANK, BASE_COMM_TAG, MPI_COMM_WORLD);
                     // print_event(e);
@@ -237,15 +245,6 @@ int main(int argc, char *argv[])
 		MPI_Comm_free(&node_comm);
         free(message);
     } else {
-        // struct event p;
-        // MPI_Recv(&p, 1, my_mpi_event_type, 2, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        // // print_event(p);
-        // printf("test elem %p\n", &p.reference_rank);
-        // int* t = &p.num;
-        // MPI_Recv(&p, 1, my_mpi_event_type, 5, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        // printf("test elem %p\n", &p.num);
-        // printf("t=%d\n",*t);
-        // print_event(p);
         for (int i=0;i<global_size;i++) {
 			if (i!=BASERANK) {
 				MPI_Irecv(&event_recv_buff[i], 1, my_mpi_event_type, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
@@ -273,8 +272,7 @@ int main(int argc, char *argv[])
                     simulation_all_completed_flag = 1;
                 }
             } else {
-                // printf("rank %d\n", current_recv_rank);
-                // print_event(event_recv_buff[current_recv_rank]);
+                print_event(event_recv_buff[current_recv_rank]);
                 printf("event num %d detected on rank %d\n", event_recv_buff[current_recv_rank].num, current_recv_rank);
                 MPI_Irecv(&event_recv_buff[current_recv_rank], 1, my_mpi_event_type, current_recv_rank, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[current_recv_rank]);
             }
