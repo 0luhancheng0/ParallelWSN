@@ -254,7 +254,7 @@ int main(int argc, char *argv[])
                 memcpy(&all_events[event_storage_p++], &event_recv_buff[current_recv_rank], sizeof(struct event));
                 total_event_num++;
                 average_encryption_time += event_recv_buff[current_recv_rank].encryption_time;
-                average_decryption_time += event_recv_buff[current_recv_rank].decryption_time;
+                average_decryption_time += event_recv_buff[current_recv_rank].decryption_time / (double)event_recv_buff[current_recv_rank].n_times;
                 // printf("event num %d detected on rank %d\n", event_recv_buff[current_recv_rank].num, current_recv_rank);
                 MPI_Irecv(&event_recv_buff[current_recv_rank], 1, my_mpi_event_type, current_recv_rank, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[current_recv_rank]);
                 // memcpy();
@@ -274,9 +274,10 @@ int main(int argc, char *argv[])
         // int num_threads = omp_get_num_threads();
         // int message_passing_num_single_event = ;
         header_p += sprintf(header + header_p, "network configuration overview: \n");
+        header_p += sprintf(header + header_p, "Simulation will run %d iterations with %d milliseconds time interval between each pair of consecutive iteration\n", N_ITERATION, INTERVAL);
         header_p += sprintf(header + header_p, "Network have %d nodes in X dimension and %d nodes in Y dimension\n", X_SIZE, Y_SIZE);
         header_p += sprintf(header + header_p, "The size of random number is %d bits, which indicate event number is bound by range [0, %d]\n", N_BIT_RAND, 1 << N_BIT_RAND);
-        header_p += sprintf(header + header_p, "average encryption time : %lf seconds\naverage decryption time : %lf seconds\n", average_encryption_time, average_decryption_time);
+        header_p += sprintf(header + header_p, "For each message: average encryption time : %lf seconds\naverage decryption time : %lf seconds\n", average_encryption_time, average_decryption_time);
         header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
