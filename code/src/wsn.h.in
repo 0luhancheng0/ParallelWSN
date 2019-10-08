@@ -6,7 +6,7 @@
 #define BASERANK 0
 
 // the number of bits each random number have, which also defines the upper bound of random number as 2^n-1, maximum 1byte (8 bit)
-#define N_BIT_RAND 1
+#define N_BIT_RAND 8
 
 // run N_INTERATION number times
 #define N_ITERATION 1
@@ -17,8 +17,8 @@
 // length of message in bytes after padding precending 0s must be greater than N_BIT_RAND / 8. IT ALSO NEED TO BE MULTIPLE OF KEYSIZE
 #define MESSAGE_LEN 1024
 
-// threshold for random number, event will be reported when occurence is greater or equal to this number, it should be greater than half of neighbor counts on any rank to make sure no more that one event is to be reported
-#define RAND_TH 1
+// threshold for random number, event will be reported when occurence is greater or equal to this number
+#define RAND_TH 3
 
 
 
