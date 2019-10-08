@@ -23,7 +23,7 @@ struct event {
     int n_times;
     int iteration;
     int reference_rank;
-	uint8_t num;
+	int num;
     
 };
 
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
     const int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1};
     const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 44, 48, 52};
     // printf("&e=%p, &e.num=%p, sizeof(e)=%lu\n", &e, &e.num, sizeof(e));
-    const MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_UINT8_T};
+    const MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT};
     MPI_Datatype my_mpi_event_type;
 
     
@@ -101,8 +101,9 @@ int main(int argc, char *argv[])
 	// MPI_Request simulation_complete_reqs[X_SIZE * Y_SIZE+1];
     double tick, encryption_time, decryption_time, t0;
     int global_size, global_rank, size, rank, nneighbor;
-    uint8_t random_num;
-    uint8_t* message;
+    int random_num;
+    // uint8_t* message;
+    int*message;
     MPI_Comm node_comm;
     int r0, r1, recv_node;
     const int baserank_list[1] = {BASERANK};
@@ -118,7 +119,7 @@ int main(int argc, char *argv[])
     MPI_Type_commit(&my_mpi_event_type);
     
     tick = MPI_Wtick();
-    uint8_t* neighbor_result;
+    int* neighbor_result;
     MPI_Comm_size(MPI_COMM_WORLD, &global_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &global_rank);
     
@@ -146,10 +147,10 @@ int main(int argc, char *argv[])
         // setup different random number seed on different rank
         srandom(time(NULL)+global_rank);
 
-        message = calloc(MESSAGE_LEN, 1);
-        MPI_Alloc_mem((MPI_Aint)(nneighbor * MESSAGE_LEN), MPI_INFO_NULL, &neighbor_result);
+        message = calloc(MESSAGE_LEN, sizeof(int));
+        MPI_Alloc_mem((MPI_Aint)(nneighbor * MESSAGE_LEN * sizeof(int)), MPI_INFO_NULL, &neighbor_result);
         MPI_Alloc_mem((MPI_Aint)(sizeof(MPI_Request) * 4), MPI_INFO_NULL, &reqs);
-        MPI_Alloc_mem(nneighbor, MPI_INFO_NULL, &neighbor_rank);
+        MPI_Alloc_mem(nneighbor*sizeof(int), MPI_INFO_NULL, &neighbor_rank);
 
         // same as power(2, nbit), but more efficient
         int upperbound = 1 << N_BIT_RAND;
@@ -159,13 +160,13 @@ int main(int argc, char *argv[])
         for (int current_i = 0; current_i < N_ITERATION; current_i++)
         {
 
-            // random_num = (uint8_t)(random() & ((1 << N_BIT_RAND) - 1));
+            // random_num = random() & ((1 << N_BIT_RAND) - 1);
             random_num = 3;
             // printf("Random number is %d on rank %d coordinates are %d %d. Has %d neighbor\n", random_num, rank, coord[0], coord[1], nneighbor);
 
             // add padding of zeros following random num
-            
-            memcpy(message, &random_num, 1);
+            message[0] = random_num;
+            // memcpy(message, &random_num, sizeof(int));
 
             t0 = MPI_Wtime(); 
             xor_encrypt(message, message, MESSAGE_LEN, key, KEY_SIZE);
@@ -174,14 +175,14 @@ int main(int argc, char *argv[])
             for (int i=0, dim=0; dim<2; ++dim) {
                 MPI_Cart_shift(node_comm, dim, 1, &r0, &r1);
                 if (r0 >= 0) {
-                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, &trash_req);
-                    MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
+                    MPI_Isend(message, MESSAGE_LEN, MPI_INT, r0, INTERNODE_COMM_TAG, node_comm, &trash_req);
+                    MPI_Irecv(&neighbor_result[i * MESSAGE_LEN], MESSAGE_LEN, MPI_INT, r0, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
                     neighbor_rank[i] = r0;
                     i++;
                 }
                 if (r1 >= 0) {
-                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, &trash_req);
-                    MPI_Irecv(&neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
+                    MPI_Isend(message, MESSAGE_LEN, MPI_INT, r1, INTERNODE_COMM_TAG, node_comm, &trash_req);
+                    MPI_Irecv(&neighbor_result[i * MESSAGE_LEN], MESSAGE_LEN, MPI_INT, r1, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
                     neighbor_rank[i] = r1;
                     i++;
                 }
@@ -212,7 +213,7 @@ int main(int argc, char *argv[])
                     e.timestamp = time(NULL);
                     for (int j = 0, k=0; j < nneighbor; j++)
                     {
-                        if ((int)neighbor_result[j * MESSAGE_LEN] == i)
+                        if (neighbor_result[j * MESSAGE_LEN] == i)
                         {
                             e.occur_on_ranks[k++] = neighbor_rank[j];
                         }
@@ -238,11 +239,11 @@ int main(int argc, char *argv[])
 		MPI_Comm_free(&node_comm);
         free(message);
     } else {
-        struct event p;
-        MPI_Recv(&p, 1, my_mpi_event_type, 2, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        print_event(p);
-        MPI_Recv(&p, 1, my_mpi_event_type, 5, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        print_event(p);
+        // struct event p;
+        // MPI_Recv(&p, 1, my_mpi_event_type, 2, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        // print_event(p);
+        // MPI_Recv(&p, 1, my_mpi_event_type, 5, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        // print_event(p);
         for (int i=0;i<global_size;i++) {
 			if (i!=BASERANK) {
 				MPI_Irecv(&event_recv_buff[i], 1, my_mpi_event_type, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
@@ -261,23 +262,23 @@ int main(int argc, char *argv[])
 
 
 
-        // while (!simulation_all_completed_flag) {
-        //     MPI_Waitany(global_size*2, base_comm_reqs, &current_recv_rank, &single_status);
-        //     if (current_recv_rank >= global_size) {
-        //         printf("rank %d completed\n", current_recv_rank-global_size);
-        //         base_comm_reqs[current_recv_rank-global_size] = MPI_REQUEST_NULL;
-        //         base_comm_reqs[current_recv_rank] = MPI_REQUEST_NULL;
-        //         remain_rank_num -= 1;
-        //         if (remain_rank_num==0) {
-        //             simulation_all_completed_flag = 1;
-        //         }
-        //     } else {
-        //         // printf("rank %d\n", current_recv_rank);
-        //         // print_event(event_recv_buff[current_recv_rank]);
-        //         printf("event num %d detected on rank %d\n", event_recv_buff[current_recv_rank].num, current_recv_rank);
-        //         MPI_Irecv(&event_recv_buff[current_recv_rank], 1, my_mpi_event_type, current_recv_rank, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[current_recv_rank]);
-        //     }
-		// }
+        while (!simulation_all_completed_flag) {
+            MPI_Waitany(global_size*2, base_comm_reqs, &current_recv_rank, &single_status);
+            if (current_recv_rank >= global_size) {
+                printf("rank %d completed\n", current_recv_rank-global_size);
+                base_comm_reqs[current_recv_rank-global_size] = MPI_REQUEST_NULL;
+                base_comm_reqs[current_recv_rank] = MPI_REQUEST_NULL;
+                remain_rank_num -= 1;
+                if (remain_rank_num==0) {
+                    simulation_all_completed_flag = 1;
+                }
+            } else {
+                // printf("rank %d\n", current_recv_rank);
+                // print_event(event_recv_buff[current_recv_rank]);
+                printf("event num %d detected on rank %d\n", event_recv_buff[current_recv_rank].num, current_recv_rank);
+                MPI_Irecv(&event_recv_buff[current_recv_rank], 1, my_mpi_event_type, current_recv_rank, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[current_recv_rank]);
+            }
+		}
     }
     MPI_Finalize();
     return(0);
