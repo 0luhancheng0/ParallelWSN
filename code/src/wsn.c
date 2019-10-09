@@ -283,7 +283,7 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
         header_p += sprintf(header + header_p, "details of nodes involved in communication:\n");
 
-        char *event_details_log = malloc(total_event_num*sizeof(char)*100);
+        char *event_details_log = malloc(total_event_num*sizeof(char)*300);
         int event_p = 0;
         int perv_interation = 0;
         // int current_iteration = 0;
@@ -293,6 +293,7 @@ int main(int argc, char *argv[])
                 perv_interation = all_events[i].iteration;
             }
             event_p += sprintf(event_details_log + event_p, "event number %d detected on rank (local) %d\n", all_events[i].num, all_events[i].reference_rank);
+            event_p += sprintf(event_details_log + event_p, "Timestamp : %s", asctime(localtime(&all_events[i].timestamp)));
             event_p += sprintf(event_details_log + event_p, "adjacent nodes are : ");
             for (int j=0;j<all_events[i].n_times;j++) {
                 event_p += sprintf(event_details_log + event_p, "%d ", all_events[i].occur_on_ranks[j]);

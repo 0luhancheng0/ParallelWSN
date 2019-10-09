@@ -3,7 +3,7 @@ all:  run
 install_dir=./WSN_INSTALL
 X_SIZE?=2
 Y_SIZE?=3
-build: 
+build: wsn.c
 	mkdir -p ./build/$(install_dir)
 	cd build && cmake .. -DX_SIZE=$(X_SIZE) -DY_SIZE=$(Y_SIZE) -DCMAKE_INSTALL_PREFIX=$(install_dir) && make install
 run: build
