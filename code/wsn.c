@@ -75,17 +75,13 @@ int main(int argc, char *argv[])
     struct event *all_events;
     MPI_Status single_status;
 	
-	// include MPI_UB
     const int event_property_count = 10;
-	
     const int blocklengths[] = {4, 2, 1, 1, 1, 1, 1, 1, 1, 1};
     const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 48, 52, 56, 60, sizeof(e)};
     const MPI_Datatype types[] = {MPI_INT, MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT, MPI_UB};
 
-	// not the actual count, just for communication
     MPI_Datatype my_mpi_event_type;
-
-    
+   
     struct event event_recv_buff[X_SIZE * Y_SIZE+1];
 	const int succeed_signal = 0;
 	const int INTERNODE_COMM_TAG=0;
@@ -109,9 +105,11 @@ int main(int argc, char *argv[])
     MPI_Request trash_req;
 
     MPI_Init(&argc, &argv);
+ 
     MPI_Type_create_struct(event_property_count, blocklengths, displacement, types, &my_mpi_event_type);
     MPI_Type_commit(&my_mpi_event_type);
-    
+ 
+   
     tick = MPI_Wtick();
     int* neighbor_result;
     MPI_Comm_size(MPI_COMM_WORLD, &global_size);
