@@ -1,7 +1,10 @@
 #include <stdint.h>
 #include <stdio.h>
 
-void xor_encrypt(int* plaintext, int* ciphertext, int message_length, const int* key, const int keysize) {
+void xor_encrypt(uint8_t* plaintext, uint8_t* ciphertext, int message_length, const uint8_t* key, const int keysize) {
+	// plaintext = (uint8_t*)plaintext;
+	// ciphertext = (uint8_t*)ciphertext;
+	
     int chunk_size = 1, nthreads, thread_id, i, j;
     #pragma omp parallel shared(nthreads, chunk_size, ciphertext) private(thread_id, i, j)
     {
@@ -14,7 +17,7 @@ void xor_encrypt(int* plaintext, int* ciphertext, int message_length, const int*
     }
  
 };
-void xor_decrypt(int* ciphertext, int* plaintext, int message_length, const int* key, const int keysize) {
+void xor_decrypt(uint8_t* ciphertext, uint8_t* plaintext, int message_length, const uint8_t* key, const int keysize) {
     xor_encrypt(ciphertext, plaintext, message_length, key, keysize);
 };
 

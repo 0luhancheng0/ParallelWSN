@@ -64,23 +64,18 @@ int main(int argc, char *argv[])
     // create mpi struct type for event
     const int event_property_count = 8;
     const int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1, 1};
-    // const MPI_Aint displacement[] = {0, &e.encryption_time - &e.occur_on_ranks[0], &e.decryption_time - &e.occur_on_ranks[0], &e.timestamp - &e.occur_on_ranks[0],
-    //                                  &e.n_times - &e.occur_on_ranks[0], &e.iteration - &e.occur_on_ranks[0], &e.num - &e.occur_on_ranks[0], &e.reference_rank - &e.occur_on_ranks[0]};
-    // printf("&e=%p, &e.num=%p, sizeof(e)=%lu\n", &e, &e.num, sizeof(e));
     const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 44, 48, 52, sizeof(e)};
     const MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT, MPI_UB};
     MPI_Datatype my_mpi_event_type;
 
     
     struct event event_recv_buff[X_SIZE * Y_SIZE+1];
-    // printf();
 	const int succeed_signal = 0;
 	const int INTERNODE_COMM_TAG=0;
 	const int BASE_COMM_TAG=1;
 	const int SIMULATION_COMPLETED_SIGNAL = 2;
 	int simulation_completion[X_SIZE * Y_SIZE+1] = {-1};
 	MPI_Request base_comm_reqs[(X_SIZE * Y_SIZE+1)*2];
-	// MPI_Request simulation_complete_reqs[X_SIZE * Y_SIZE+1];
     double tick, encryption_time, decryption_time, t0;
     int global_size, global_rank, size, rank, nneighbor;
     int random_num;
@@ -123,6 +118,8 @@ int main(int argc, char *argv[])
 
         // create cart topology
         MPI_Cart_create(node_comm, 2, dim, period, reorder, &node_comm);
+
+		// get coordinate in cart
         MPI_Cart_coords(node_comm, rank, 2, coord);
         get_neighbor_count(coord, &nneighbor);
 
@@ -137,7 +134,6 @@ int main(int argc, char *argv[])
         // same as power(2, nbit), but more efficient
         int upperbound = 1 << N_BIT_RAND;
         int *num_recv = calloc(upperbound, sizeof(int));
-        // e.occur_on_ranks = malloc(nneighbor);
 
         for (int current_i = 0; current_i < N_ITERATION; current_i++)
         {
@@ -151,7 +147,7 @@ int main(int argc, char *argv[])
             // memcpy(message, &random_num, sizeof(int));
 
             t0 = MPI_Wtime(); 
-            xor_encrypt(message, message, MESSAGE_LEN, key, KEY_SIZE);
+            xor_encrypt(message, message, MESSAGE_LEN * sizeof(int), key, KEY_SIZE);
             encryption_time = MPI_Wtime() - t0;
 
             for (int i=0, dim=0; dim<2; ++dim) {
@@ -173,7 +169,7 @@ int main(int argc, char *argv[])
 
 
             t0 = MPI_Wtime();
-            xor_decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN, key, KEY_SIZE);
+            xor_decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN * sizeof(int), key, KEY_SIZE);
             decryption_time = MPI_Wtime() - t0;
 			// for (int i=0;i<nneighbor;i++) { 
 			// 	printf("rank %d received %d from rank %d\n", rank, (int)neighbor_result[i*MESSAGE_LEN], neighbor_rank[i]);
