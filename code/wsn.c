@@ -19,6 +19,7 @@
 struct event
 {
     int occur_on_ranks[4];
+	int coordinate[2];
     double encryption_time;
     double decryption_time;
     long int timestamp;
@@ -55,17 +56,33 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
         *neighbor_count -= 1;
     }
 }
+
+//struct event
+//{
+//    int occur_on_ranks[4];
+//	int coordinate[2];
+//    double encryption_time;
+//    double decryption_time;
+//    long int timestamp;
+//    int n_times;
+//    int iteration;
+//    int num;
+//    int reference_rank;
+//};
 int main(int argc, char *argv[])
 {
     struct event e;
     struct event *all_events;
     MPI_Status single_status;
+	
+	// include MPI_UB
+    const int event_property_count = 10;
+	
+    const int blocklengths[] = {4, 2, 1, 1, 1, 1, 1, 1, 1, 1};
+    const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 48, 52, 56, 60, sizeof(e)};
+    const MPI_Datatype types[] = {MPI_INT, MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT, MPI_UB};
 
-    // create mpi struct type for event
-    const int event_property_count = 8;
-    const int blocklengths[] = {4, 1, 1, 1, 1, 1, 1, 1, 1};
-    const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 44, 48, 52, sizeof(e)};
-    const MPI_Datatype types[] = {MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT, MPI_UB};
+	// not the actual count, just for communication
     MPI_Datatype my_mpi_event_type;
 
     
@@ -182,6 +199,8 @@ int main(int argc, char *argv[])
                 if (num_recv[i] >= RAND_TH)
                 {
                     e.num = i;
+					e.coordinate[0] = coord[0];
+					e.coordinate[1] = coord[1];
                     e.n_times = num_recv[i];
                     e.iteration = current_i;
                     e.reference_rank = rank;
@@ -272,7 +291,7 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "network configuration overview: \n");
         header_p += sprintf(header + header_p, "Simulation will run %d iterations with %d milliseconds time interval between each pair of consecutive iteration\n", N_ITERATION, INTERVAL);
         header_p += sprintf(header + header_p, "Network have %d nodes in X dimension and %d nodes in Y dimension\n", X_SIZE, Y_SIZE);
-        header_p += sprintf(header + header_p, "The size of random number is %d bits, which indicate event number is bound by range [0, %d]\n", N_BIT_RAND, 1 << N_BIT_RAND);
+        header_p += sprintf(header + header_p, "The size of random number is %d bits, which indicate event number is bound by range [0, %d)\n", N_BIT_RAND, 1 << N_BIT_RAND);
         header_p += sprintf(header + header_p, "For each message: average encryption time : %lf seconds\naverage decryption time : %lf seconds\n", average_encryption_time, average_decryption_time);
         header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
@@ -288,7 +307,7 @@ int main(int argc, char *argv[])
                 event_p += sprintf(event_details_log + event_p, "Iteration %d\n\n", all_events[i].iteration);
                 perv_interation = all_events[i].iteration;
             }
-            event_p += sprintf(event_details_log + event_p, "event number %d detected on rank (local) %d\n", all_events[i].num, all_events[i].reference_rank);
+            event_p += sprintf(event_details_log + event_p, "event number %d detected on rank (local) %d with coordinate (%d, %d)\n", all_events[i].num, all_events[i].reference_rank, all_events[i].coordinate[0], all_events[i].coordinate[1]);
             event_p += sprintf(event_details_log + event_p, "Timestamp : %s", asctime(localtime(&all_events[i].timestamp)));
             event_p += sprintf(event_details_log + event_p, "adjacent nodes are : ");
             for (int j=0;j<all_events[i].n_times;j++) {
