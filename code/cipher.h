@@ -8,5 +8,5 @@ static const int key[4] = {123,432,5435, 43453};
 
 
 // xor_encrypt and xor_decrypt are the same function, which xor key with first argument then store result in second argument
-void xor_encrypt(int* plaintext, int* ciphertext, int message_length, const int* k, int k_size);
-void xor_decrypt(int* ciphertext, int* plaintext, int message_length, const int* k, int k_size);
+void xor_encrypt(int* plaintext, int* ciphertext, int message_length, const int* k, const int k_size);
+void xor_decrypt(int* ciphertext, int* plaintext, int message_length, const int* k, const int k_size);

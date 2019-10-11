@@ -267,7 +267,7 @@ int main(int argc, char *argv[])
         // }
         char filename[] = "log.txt";
         FILE *f = fopen(filename, "w");
-        char header[200] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
+        char header[500] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
         ;
         int header_p = strlen(header);
         // char summary[100];

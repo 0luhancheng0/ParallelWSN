@@ -16,5 +16,5 @@ test: test.c cipher.c
 debug: build
 	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))" --oversubscribe xterm -e lldb ./wsn.c  ./build/$(install_dir)/bin/wsn 
 clean:
-	rm -rf build *.mpiP test a.out omp_aes
+	rm -rf build *.mpiP test a.out omp_aes log.txt
 
