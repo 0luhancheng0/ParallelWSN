@@ -11,11 +11,6 @@
 #include "cipher.h"
 #include <omp.h>
 
-// The time taken to encrypt/decrypt a message before sending or after receiving. The use of OpenMP here should demonstrate improvements in encryption and/or decryption processing time.
-// - Number of messages passed throughout the network
-// - Number of events occurred throughout the network
-// - Details of nodes involved in each of the events (reference node and its adjacent nodes)
-
 struct event
 {
     int occur_on_ranks[4];
@@ -39,7 +34,6 @@ static void print_event(struct event e) {
 
 static void get_neighbor_count(int coord[2], int* neighbor_count) {
 	int *neibhbor_count;
-	// MPI_Cart_shift()	
     *neighbor_count = 4;
     if (coord[0] == 0) {
         *neighbor_count -= 1;
@@ -57,18 +51,6 @@ static void get_neighbor_count(int coord[2], int* neighbor_count) {
     }
 }
 
-//struct event
-//{
-//    int occur_on_ranks[4];
-//	int coordinate[2];
-//    double encryption_time;
-//    double decryption_time;
-//    long int timestamp;
-//    int n_times;
-//    int iteration;
-//    int num;
-//    int reference_rank;
-//};
 int main(int argc, char *argv[])
 {
     struct event e;
