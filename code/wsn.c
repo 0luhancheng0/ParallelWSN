@@ -57,12 +57,12 @@ int main(int argc, char *argv[])
     struct event *all_events;
     MPI_Status single_status;
 	
-    const int event_property_count = 10;
-    const int blocklengths[] = {4, 2, 1, 1, 1, 1, 1, 1, 1, 1};
-    const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 48, 52, 56, 60, sizeof(e)};
-    const MPI_Datatype types[] = {MPI_INT, MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT, MPI_UB};
+    // const int event_property_count = 10;
+    // const int blocklengths[] = {4, 2, 1, 1, 1, 1, 1, 1, 1, 1};
+    // const MPI_Aint displacement[] = {0, 16, 24, 32, 40, 48, 52, 56, 60, sizeof(e)};
+    // const MPI_Datatype types[] = {MPI_INT, MPI_INT, MPI_DOUBLE, MPI_DOUBLE, MPI_LONG, MPI_INT, MPI_INT, MPI_INT, MPI_INT, MPI_UB};
 
-    MPI_Datatype my_mpi_event_type;
+    // MPI_Datatype my_mpi_event_type;
    
     struct event event_recv_buff[X_SIZE * Y_SIZE+1];
 	const int succeed_signal = 0;
@@ -88,8 +88,8 @@ int main(int argc, char *argv[])
 
     MPI_Init(&argc, &argv);
  
-    MPI_Type_create_struct(event_property_count, blocklengths, displacement, types, &my_mpi_event_type);
-    MPI_Type_commit(&my_mpi_event_type);
+    // MPI_Type_create_struct(event_property_count, blocklengths, displacement, types, &my_mpi_event_type);
+    // MPI_Type_commit(&my_mpi_event_type);
  
    
     tick = MPI_Wtick();
@@ -193,8 +193,8 @@ int main(int argc, char *argv[])
                             e.occur_on_ranks[k++] = neighbor_rank[j];
                         }
                     }
-                    
-                    MPI_Send(&e, 1, my_mpi_event_type, BASERANK, BASE_COMM_TAG, MPI_COMM_WORLD);
+                    xor_encrypt(&e, &e, sizeof(e), key, KEY_SIZE);
+                    MPI_Send(&e, sizeof(e), MPI_UINT8_T, BASERANK, BASE_COMM_TAG, MPI_COMM_WORLD);
 					// clean up for next iteration
                     for (int j=i;j<upperbound;j++) {
                         num_recv[j] = 0;
@@ -223,11 +223,11 @@ int main(int argc, char *argv[])
             if (i!=BASERANK) {
 
 				// this receive is for actual event message
-				MPI_Irecv(&event_recv_buff[i], 1, my_mpi_event_type, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
-				
-				// this receive is for the signal at the end of communication
-				MPI_Irecv(&simulation_completion[i], 1, MPI_INT, i, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD, &base_comm_reqs[i+global_size]);
-			} else {
+				// MPI_Irecv(&event_recv_buff[i], 1, my_mpi_event_type, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
+                MPI_Irecv(&event_recv_buff[i], sizeof(struct event), MPI_UINT8_T, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
+                // this receive is for the signal at the end of communication
+                MPI_Irecv(&simulation_completion[i], 1, MPI_INT, i, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD, &base_comm_reqs[i + global_size]);
+            } else {
 				// set request as MPI_REQUEST_NULL for root node itself
 				base_comm_reqs[i] = MPI_REQUEST_NULL;
 				base_comm_reqs[i+global_size] = MPI_REQUEST_NULL;
@@ -260,13 +260,15 @@ int main(int argc, char *argv[])
 			// if event is received
             } else {
 				// store received event
+                xor_decrypt(&event_recv_buff[current_recv_rank], &event_recv_buff[current_recv_rank], sizeof(e), key, KEY_SIZE);
                 memcpy(&all_events[event_storage_p++], &event_recv_buff[current_recv_rank], sizeof(struct event));
+                
                 total_event_num++;
                 average_encryption_time += event_recv_buff[current_recv_rank].encryption_time;
                 average_decryption_time += event_recv_buff[current_recv_rank].decryption_time / (double)event_recv_buff[current_recv_rank].n_times;
 
 				// respawn receive
-                MPI_Irecv(&event_recv_buff[current_recv_rank], 1, my_mpi_event_type, current_recv_rank, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[current_recv_rank]);
+                MPI_Irecv(&event_recv_buff[current_recv_rank], sizeof(struct event), MPI_UINT8_T, current_recv_rank, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[current_recv_rank]);
             }
 		}
         average_encryption_time = average_encryption_time / total_event_num;
