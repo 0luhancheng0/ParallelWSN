@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
 
 			// encryption
             t0 = MPI_Wtime(); 
-            xor_encrypt(message, message, MESSAGE_LEN * sizeof(int), key, KEY_SIZE);
+            xor_encrypt(message, message, MESSAGE_LEN * sizeof(int));
             encryption_time = MPI_Wtime() - t0;
 
 			// inter node communication
@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
 
 			// decryption
             t0 = MPI_Wtime();
-            xor_decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN * sizeof(int), key, KEY_SIZE);
+            xor_decrypt(neighbor_result, neighbor_result, nneighbor * MESSAGE_LEN * sizeof(int));
             decryption_time = MPI_Wtime() - t0;
 
 			// count number of occurence for each number
@@ -193,7 +193,7 @@ int main(int argc, char *argv[])
                             e.occur_on_ranks[k++] = neighbor_rank[j];
                         }
                     }
-                    xor_encrypt(&e, &e, sizeof(e), key, KEY_SIZE);
+                    xor_encrypt(&e, &e, sizeof(e));
                     MPI_Send(&e, sizeof(e), MPI_UINT8_T, BASERANK, BASE_COMM_TAG, MPI_COMM_WORLD);
 					// clean up for next iteration
                     for (int j=i;j<upperbound;j++) {
@@ -260,7 +260,7 @@ int main(int argc, char *argv[])
 			// if event is received
             } else {
 				// store received event
-                xor_decrypt(&event_recv_buff[current_recv_rank], &event_recv_buff[current_recv_rank], sizeof(e), key, KEY_SIZE);
+                xor_decrypt(&event_recv_buff[current_recv_rank], &event_recv_buff[current_recv_rank], sizeof(e));
                 memcpy(&all_events[event_storage_p++], &event_recv_buff[current_recv_rank], sizeof(struct event));
                 
                 total_event_num++;
