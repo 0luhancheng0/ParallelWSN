@@ -100,8 +100,8 @@ int main(int argc, char *argv[])
     int neighbor_rank[4];
 	int upperbound = 1 << N_BIT_RAND;
     MPI_Group global_group, node_group;
-    MPI_Request *reqs;
-    MPI_Request trash_req;
+    // MPI_Request *reqs;
+    // MPI_Request trash_req;
 
     MPI_Init(&argc, &argv);
     MPI_Type_contiguous(5, MPI_INT, &mpi_sensor_summary_type);
@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
 		printf("rank %d has %d neighbor\n", global_rank, nneighbor);
 		#endif
         MPI_Alloc_mem((MPI_Aint)(nneighbor * MESSAGE_LEN), MPI_INFO_NULL, &neighbor_result);
-        MPI_Alloc_mem((MPI_Aint)(sizeof(MPI_Request) * 4), MPI_INFO_NULL, &reqs);
+        // MPI_Alloc_mem((MPI_Aint)(sizeof(MPI_Request) * 4), MPI_INFO_NULL, &reqs);
         // MPI_Alloc_mem(nneighbor * sizeof(int), MPI_INFO_NULL, &neighbor_rank);
 
 
@@ -188,19 +188,21 @@ int main(int argc, char *argv[])
             for (int i=0, dim=0; dim<2; ++dim) {
                 MPI_Cart_shift(node_comm, dim, 1, &r0, &r1);
                 if (r0 >= 0) {
-                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, &trash_req);
-                    MPI_Irecv(&neighbor_result[i * MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
+                    MPI_Sendrecv(message, MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, &neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, MPI_STATUS_IGNORE);
+                    // MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, &trash_req);
+                    // MPI_Irecv(&neighbor_result[i * MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r0, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
                     neighbor_rank[i] = r0;
                     i++;
                 }
                 if (r1 >= 0) {
-                    MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, &trash_req);
-                    MPI_Irecv(&neighbor_result[i * MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
+                    MPI_Sendrecv(message, MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, &neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, MPI_STATUS_IGNORE);
+                    // MPI_Isend(message, MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, &trash_req);
+                    // MPI_Irecv(&neighbor_result[i * MESSAGE_LEN], MESSAGE_LEN, MPI_UINT8_T, r1, INTERNODE_COMM_TAG, node_comm, &reqs[i]);
                     neighbor_rank[i] = r1;
                     i++;
                 }
             }
-            MPI_Waitall(nneighbor, reqs, MPI_STATUSES_IGNORE);
+            // MPI_Waitall(nneighbor, reqs, MPI_STATUSES_IGNORE);
 			#if DEBUG
 			printf("rank %d finished internode comm in iteration %d\n", global_rank, current_i);
 			#endif
