@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 	AesCtrInitialiseWithKey(&ctx, key, 16, IV);
 
     struct event e;
-	printf("sizeof e is %lu\n", sizeof(e));
+	// printf("sizeof e is %lu\n", sizeof(e));
 	
 	struct node_summary sensor_summary;
 	MPI_Datatype mpi_sensor_summary_type;
@@ -268,6 +268,7 @@ int main(int argc, char *argv[])
         AesCtrXor(&ctx, &sensor_summary, &sensor_summary, sizeof(int) * 5);
         // AesCtrSetStreamIndex(&)
         MPI_Send(&sensor_summary, 1, mpi_sensor_summary_type, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
+        printf("rank %d completed\n", global_rank);
 		// MPI_Send(&succeed_signal, 1, MPI_UINT8_T, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
     } 
 		else {
