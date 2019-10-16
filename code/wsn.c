@@ -378,7 +378,7 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
 
 		// write log for received event details
-        char *event_details_log = malloc(total_event_num*sizeof(char)*300);
+        char *event_details_log = malloc(total_event_num*sizeof(char)*400);
         int event_p = 0;
         int perv_iteration = -1;
         for (int i=0;i<total_event_num;i++) {
