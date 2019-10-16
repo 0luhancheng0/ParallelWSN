@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
     const int dim[2] = {X_SIZE, Y_SIZE}, period[2] = {0}, reorder = 0;
 	int coord[2];
     int neighbor_rank[4];
+	int upperbound = 1 << N_BIT_RAND;
     MPI_Group global_group, node_group;
     MPI_Request *reqs;
     MPI_Request trash_req;
@@ -139,7 +140,6 @@ int main(int argc, char *argv[])
 
 
         // same as power(2, nbit), but more efficient
-        int upperbound = 1 << N_BIT_RAND;
         int *num_recv = calloc(upperbound, sizeof(int));
 
         for (int current_i = 0; current_i < N_ITERATION; current_i++)
@@ -270,6 +270,7 @@ int main(int argc, char *argv[])
         int remain_rank_num = global_size-1;
         double encryption_time = 0;
         double decryption_time = 0;
+        int *event_activation_num = calloc(upperbound, sizeof(int));
 
         while (!simulation_all_completed_flag) {
 
@@ -298,6 +299,7 @@ int main(int argc, char *argv[])
                 total_event_num++;
                 encryption_time += all_events[event_storage_p].encryption_time;
                 decryption_time += all_events[event_storage_p].decryption_time;
+				event_activation_num[(int)all_events[event_storage_p].num] ++;
 				event_storage_p++;
 
 				// respawn receive
@@ -311,12 +313,18 @@ int main(int argc, char *argv[])
 
 		// the header of logfile contains an overview of network
         char header[500] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
-        ;
         int header_p = strlen(header);
         header_p += sprintf(header + header_p, "network configuration overview: \n");
         header_p += sprintf(header + header_p, "Simulation will run %d iterations with %d milliseconds time interval between each pair of consecutive iteration\n", N_ITERATION, INTERVAL);
         header_p += sprintf(header + header_p, "Network have %d nodes in X dimension and %d nodes in Y dimension\n", X_SIZE, Y_SIZE);
         header_p += sprintf(header + header_p, "The size of random number is %d bits, which indicate event number is bound by range [0, %d)\n", N_BIT_RAND, 1 << N_BIT_RAND);
+
+        header_p += sprintf(header + header_p, "event activation summary: \n");
+		for (int i=0;i<upperbound;i++) {
+			header_p += sprintf(header + header_p, "\tevent %d is activated %d times\n", i, event_activation_num[i]);
+		}
+
+
         header_p += sprintf(header + header_p, "For each activation: encryption time : %lf seconds\ndecryption time : %lf seconds\n", encryption_time, decryption_time);
         header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
