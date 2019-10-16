@@ -210,6 +210,8 @@ int main(int argc, char *argv[])
 
 			// count number of occurence for each number
 			// AesCtrXor(&ctx, neighbor_result, neighbor_result, MESSAGE_LEN*nneighbor);
+			#pragma omp parallel
+			#pragma omp for shared(nneighbor, ctx, neighbor_result, global_rank, num_recv)
             for (int i=0;i <nneighbor; i++) {
 				// AesCtrXor(&ctx, neighbor_result, neighbor_result, MESSAGE_LEN);
 				AesCtrXor(&ctx, &neighbor_result[i*MESSAGE_LEN], &neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN);
