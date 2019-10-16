@@ -1,0 +1,157 @@
+Event detection in a fully distributed wireless sensor network - WSN
+
+network configuration overview: 
+Simulation will run 200 iterations with 1 milliseconds time interval between each pair of consecutive iteration
+Network have 2 nodes in X dimension and 3 nodes in Y dimension
+The size of random number is 2 bits, which indicate event number is bound by range [0, 4)
+process and topology summary: 
+	process rank 1 in MPI_COMM_WORLD has local rank 0 in sensors communicatior; The coordinate is (0, 0); 1 OpenMP threads are available on this process
+	process rank 2 in MPI_COMM_WORLD has local rank 1 in sensors communicatior; The coordinate is (0, 1); 1 OpenMP threads are available on this process
+	process rank 3 in MPI_COMM_WORLD has local rank 2 in sensors communicatior; The coordinate is (0, 2); 1 OpenMP threads are available on this process
+	process rank 4 in MPI_COMM_WORLD has local rank 3 in sensors communicatior; The coordinate is (1, 0); 1 OpenMP threads are available on this process
+	process rank 5 in MPI_COMM_WORLD has local rank 4 in sensors communicatior; The coordinate is (1, 1); 1 OpenMP threads are available on this process
+	process rank 6 in MPI_COMM_WORLD has local rank 5 in sensors communicatior; The coordinate is (1, 2); 1 OpenMP threads are available on this process
+details of communication:
+event activation summary: 
+	event 0 is activated 5 times
+	event 1 is activated 9 times
+	event 2 is activated 5 times
+	event 3 is activated 3 times
+For each activation: encryption time : 0.023946 seconds
+decryption time : 0.016573 seconds
+number of message pass between base station and nodes : 28
+number of message passing happened among nodes: 2800
+total events detected: 22
+
+Iteration 2
+
+event number 3 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 25
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 36
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 37
+
+event number 3 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 40
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 45
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 59
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 77
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 78
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 79
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 90
+
+event number 2 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 96
+
+event number 2 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 121
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 123
+
+event number 0 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 125
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 127
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 142
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 143
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 168
+
+event number 2 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 171
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+
+Iteration 178
+
+event number 3 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 1 3 5 
+
+Iteration 188
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Oct 16 22:45:40 2019
+adjacent nodes are (local): 4 0 2 
+

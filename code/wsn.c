@@ -268,7 +268,7 @@ int main(int argc, char *argv[])
         AesCtrXor(&ctx, &sensor_summary, &sensor_summary, sizeof(int) * 5);
         // AesCtrSetStreamIndex(&)
         MPI_Send(&sensor_summary, 1, mpi_sensor_summary_type, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
-        printf("rank %d completed\n", global_rank);
+        // printf("rank %d completed\n", global_rank);
 		// MPI_Send(&succeed_signal, 1, MPI_UINT8_T, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
     } 
 		else {
@@ -321,7 +321,7 @@ int main(int argc, char *argv[])
                 }
                 AesCtrXor(&ctx, &all_sensor_summary[current_recv_rank-global_size], &all_sensor_summary[current_recv_rank-global_size], sizeof(int) * 5);
                 AesCtrSetStreamIndex(&ctx, 0);
-                printf("global %d, local %d coord (%d %d)\n", all_sensor_summary[current_recv_rank - global_size].local_rank, all_sensor_summary[current_recv_rank - global_size].global_rank, all_sensor_summary[current_recv_rank - global_size].coordinate[0], all_sensor_summary[current_recv_rank - global_size].coordinate[1]);
+                // printf("global %d, local %d coord (%d %d)\n", all_sensor_summary[current_recv_rank - global_size].local_rank, all_sensor_summary[current_recv_rank - global_size].global_rank, all_sensor_summary[current_recv_rank - global_size].coordinate[0], all_sensor_summary[current_recv_rank - global_size].coordinate[1]);
                 // all_sensor_summary[current_recv_rank-global_size].global_rank = current_recv_rank-global_size;
 
                 // if event is received
@@ -353,7 +353,7 @@ int main(int argc, char *argv[])
         FILE *f = fopen(filename, "w");
 
 		// the header of logfile contains an overview of network
-        char header[800] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
+        char header[4000] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
         int header_p = strlen(header);
         header_p += sprintf(header + header_p, "network configuration overview: \n");
         header_p += sprintf(header + header_p, "Simulation will run %d iterations with %d milliseconds time interval between each pair of consecutive iteration\n", N_ITERATION, INTERVAL);
@@ -362,7 +362,6 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "process and topology summary: \n");
         for (int i=0; i<global_size;i++) {
             if (i != BASERANK) {
-                printf("%d %d %d %d %d\n",all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
                 header_p += sprintf(header + header_p, "\tprocess rank %d in MPI_COMM_WORLD has local rank %d in sensors communicatior; The coordinate is (%d, %d); %d OpenMP threads are available on this process\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
             }
         }
