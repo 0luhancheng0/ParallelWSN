@@ -8,13 +8,13 @@ Y_SIZE?=5
 N_BIT_RAND?=2
 
 # N_INTERATION defines how many iterations the simulation will run
-N_ITERATION?=200
+N_ITERATION?=20
 
 # Each sensor will wail <INTERVAL> millionseconds between iterations
 INTERVAL?=1
 
 # MESSAGE_LEN represent the length of message that is passed among sensors. In plaintext, its first byte contains random number generated, and folloing bytes are 0 padding. It would be best to keep this as multiple of 16 (block size in CTR mode)
-MESSAGE_LEN?=1024
+MESSAGE_LEN?=32768
 
 # turn on debugging will result in information being printed to stdout
 DEBUG?=0
