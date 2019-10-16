@@ -210,10 +210,7 @@ int main(int argc, char *argv[])
 
 			// count number of occurence for each number
 			// AesCtrXor(&ctx, neighbor_result, neighbor_result, MESSAGE_LEN*nneighbor);
-			#pragma omp parallel shared(nneighbor, ctx, neighbor_result, global_rank, num_recv)
-			#pragma omp for 
             for (int i=0;i <nneighbor; i++) {
-				// AesCtrXor(&ctx, neighbor_result, neighbor_result, MESSAGE_LEN);
 				AesCtrXor(&ctx, &neighbor_result[i*MESSAGE_LEN], &neighbor_result[i*MESSAGE_LEN], MESSAGE_LEN);
 				AesCtrSetStreamIndex(&ctx, 0);
                 num_recv[(int)neighbor_result[i*MESSAGE_LEN]] ++; 
@@ -270,6 +267,8 @@ int main(int argc, char *argv[])
         AesCtrXor(&ctx, &sensor_summary, &sensor_summary, sizeof(int) * 5);
         // AesCtrSetStreamIndex(&)
         MPI_Send(&sensor_summary, 1, mpi_sensor_summary_type, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
+		MPI_Finalize();
+		return(0);
         // printf("rank %d completed\n", global_rank);
 		// MPI_Send(&succeed_signal, 1, MPI_UINT8_T, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
     } 
@@ -323,10 +322,6 @@ int main(int argc, char *argv[])
                 }
                 AesCtrXor(&ctx, &all_sensor_summary[current_recv_rank-global_size], &all_sensor_summary[current_recv_rank-global_size], sizeof(int) * 5);
                 AesCtrSetStreamIndex(&ctx, 0);
-                // printf("global %d, local %d coord (%d %d)\n", all_sensor_summary[current_recv_rank - global_size].local_rank, all_sensor_summary[current_recv_rank - global_size].global_rank, all_sensor_summary[current_recv_rank - global_size].coordinate[0], all_sensor_summary[current_recv_rank - global_size].coordinate[1]);
-                // all_sensor_summary[current_recv_rank-global_size].global_rank = current_recv_rank-global_size;
-
-                // if event is received
             } else {
 				// store received event
 				AesCtrXor(&ctx, &event_recv_buff[current_recv_rank], &all_events[event_storage_p], sizeof(e));
@@ -355,7 +350,7 @@ int main(int argc, char *argv[])
         FILE *f = fopen(filename, "w");
 
 		// the header of logfile contains an overview of network
-        char header[4000] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
+        char header[5000] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
         int header_p = strlen(header);
         header_p += sprintf(header + header_p, "network configuration overview: \n");
         header_p += sprintf(header + header_p, "Simulation will run %d iterations with %d milliseconds time interval between each pair of consecutive iteration\n", N_ITERATION, INTERVAL);
@@ -375,7 +370,7 @@ int main(int argc, char *argv[])
 		}
 
 
-        header_p += sprintf(header + header_p, "For each activation: encryption time : %lf seconds\ndecryption time : %lf seconds\n", encryption_time, decryption_time);
+        header_p += sprintf(header + header_p, "For each activation: \n\tencryption time : %lf seconds\n\tdecryption time : %lf seconds\n", encryption_time, decryption_time);
         header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);

@@ -8,4 +8,4 @@
 hostname
 module load mpip
 make build
-make run
+make run MESSAGE_LEN=32768 X_SIZE=4 Y_SIZE=5 N_ITERATION=2000
