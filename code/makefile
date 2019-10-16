@@ -1,8 +1,8 @@
 
 all: run
 # X_SIZE and Y_SIZE control number of nodes in x dimension and y dimension
-X_SIZE?=1
-Y_SIZE?=3
+X_SIZE?=4
+Y_SIZE?=5
 
 # N_BIT_RAND defines how many bits random number generated occpy, controls the probability of event will decrease as it increase. The maximum value is 8 as the type of random number is uint8_t
 N_BIT_RAND?=2
