@@ -18,7 +18,7 @@
 struct event
 {
     int occur_on_ranks[4];
-	int coordinate[2];
+//	int coordinate[2];
     double encryption_time;
     double decryption_time;
     long int timestamp;
@@ -26,6 +26,15 @@ struct event
     int iteration;
     int reference_rank;
     uint8_t num;
+};
+
+struct node_summary
+{
+    int coordinate[2];
+    int global_rank;
+	int local_rank;	
+	int threads_num;
+	
 };
 static void print_event(struct event e) {
     printf("event num %d detected on rank (local) %d\nencryption time taken: %lf seconds\ndecryption time taken: %lf seconds\ntime: %siteration: %d\n",e.num, e.reference_rank, e.encryption_time, e.decryption_time, asctime(localtime(&e.timestamp)), e.iteration);
@@ -64,7 +73,12 @@ int main(int argc, char *argv[])
 	AesCtrInitialiseWithKey(&ctx, key, 16, IV);
 
     struct event e;
+	printf("sizeof e is %lu\n", sizeof(e));
 	
+	struct node_summary sensor_summary;
+	MPI_Datatype mpi_sensor_summary_type;
+	
+
     struct event *all_events;
     MPI_Status single_status;
     struct event event_recv_buff[X_SIZE * Y_SIZE+1];
@@ -90,7 +104,9 @@ int main(int argc, char *argv[])
     MPI_Request trash_req;
 
     MPI_Init(&argc, &argv);
- 
+    MPI_Type_contiguous(5, MPI_INT, &mpi_sensor_summary_type);
+    MPI_Type_commit(&mpi_sensor_summary_type);
+
     // MPI_Type_create_struct(event_property_count, blocklengths, displacement, types, &my_mpi_event_type);
     // MPI_Type_commit(&my_mpi_event_type);
  
@@ -125,6 +141,14 @@ int main(int argc, char *argv[])
 		// get coordinate in cart
         MPI_Cart_coords(node_comm, rank, 2, coord);
         get_neighbor_count(coord, &nneighbor);
+
+		// create sensor summary
+		sensor_summary.global_rank = global_rank;
+        sensor_summary.local_rank = rank;
+        memcpy(&sensor_summary.coordinate[0], &coord[0], sizeof(int) * 2);
+        sensor_summary.threads_num = omp_get_num_threads();
+        
+
 
         // setup different random number seed on different rank
         srandom(time(NULL)+global_rank);
@@ -203,11 +227,11 @@ int main(int argc, char *argv[])
                 if (num_recv[i] >= RAND_TH)
                 {
                     e.num = i;
-					e.coordinate[0] = coord[0];
-					e.coordinate[1] = coord[1];
+					// e.coordinate[0] = coord[0];
+					// e.coordinate[1] = coord[1];
                     e.n_times = num_recv[i];
                     e.iteration = current_i;
-                    e.reference_rank = rank;
+                    e.reference_rank = global_rank;
                     e.encryption_time = encryption_time * (double)num_recv[i];
                     e.decryption_time = decryption_time;
                     e.timestamp = time(NULL);
@@ -241,13 +265,18 @@ int main(int argc, char *argv[])
         }
 
 		// send succeed signal to base station when simulation complete
-		MPI_Send(&succeed_signal, 1, MPI_UINT8_T, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
+        AesCtrXor(&ctx, &sensor_summary, &sensor_summary, sizeof(int) * 5);
+        // AesCtrSetStreamIndex(&)
+        MPI_Send(&sensor_summary, 1, mpi_sensor_summary_type, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
+		// MPI_Send(&succeed_signal, 1, MPI_UINT8_T, BASERANK, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD);
     } 
 		else {
 
         int max_possible_events = X_SIZE*Y_SIZE*N_ITERATION;
         int event_storage_p=0;
         int total_event_num = 0;
+        struct node_summary* all_sensor_summary;
+        all_sensor_summary = malloc(sizeof(struct node_summary) * global_size);
         all_events = malloc(max_possible_events * sizeof(struct event));
 
 		// spawn set of receive for nodes
@@ -258,7 +287,7 @@ int main(int argc, char *argv[])
 				// this receive is for actual event message
                 MPI_Irecv(&event_recv_buff[i], sizeof(struct event), MPI_UINT8_T, i, BASE_COMM_TAG, MPI_COMM_WORLD, &base_comm_reqs[i]);
                 // this receive is for the signal at the end of communication
-                MPI_Irecv(&simulation_completion[i], 1, MPI_UINT8_T, i, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD, &base_comm_reqs[i + global_size]);
+                MPI_Irecv(&all_sensor_summary[i], 1, mpi_sensor_summary_type, i, SIMULATION_COMPLETED_SIGNAL, MPI_COMM_WORLD, &base_comm_reqs[i + global_size]);
             } else {
 				// set request as MPI_REQUEST_NULL for root node itself
 				base_comm_reqs[i] = MPI_REQUEST_NULL;
@@ -289,8 +318,12 @@ int main(int argc, char *argv[])
                 if (remain_rank_num==0) {
                     simulation_all_completed_flag = 1;
                 }
-			
-			// if event is received
+                AesCtrXor(&ctx, &all_sensor_summary[current_recv_rank-global_size], &all_sensor_summary[current_recv_rank-global_size], sizeof(int) * 5);
+                AesCtrSetStreamIndex(&ctx, 0);
+                printf("global %d, local %d coord (%d %d)\n", all_sensor_summary[current_recv_rank - global_size].local_rank, all_sensor_summary[current_recv_rank - global_size].global_rank, all_sensor_summary[current_recv_rank - global_size].coordinate[0], all_sensor_summary[current_recv_rank - global_size].coordinate[1]);
+                // all_sensor_summary[current_recv_rank-global_size].global_rank = current_recv_rank-global_size;
+
+                // if event is received
             } else {
 				// store received event
 				AesCtrXor(&ctx, &event_recv_buff[current_recv_rank], &all_events[event_storage_p], sizeof(e));
@@ -346,7 +379,8 @@ int main(int argc, char *argv[])
                 event_p += sprintf(event_details_log + event_p, "Iteration %d\n\n", all_events[i].iteration);
                 perv_iteration = all_events[i].iteration;
             }
-            event_p += sprintf(event_details_log + event_p, "event number %d detected on rank (local) %d with coordinate (%d, %d)\n", all_events[i].num, all_events[i].reference_rank, all_events[i].coordinate[0], all_events[i].coordinate[1]);
+            event_p += sprintf(event_details_log + event_p, "event number %d detected on rank %d (rank %d locally) with coordinate (%d, %d)\n", all_events[i].num, all_sensor_summary[all_events[i].reference_rank].global_rank, all_sensor_summary[all_events[i].reference_rank].local_rank, all_sensor_summary[all_events[i].reference_rank].coordinate[0], all_sensor_summary[all_events[i].reference_rank].coordinate[1]);
+
             event_p += sprintf(event_details_log + event_p, "Timestamp : %s", asctime(localtime(&all_events[i].timestamp)));
             event_p += sprintf(event_details_log + event_p, "adjacent nodes are : ");
             for (int j=0;j<all_events[i].n_times;j++) {

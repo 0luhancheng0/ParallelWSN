@@ -28,7 +28,7 @@
 #endif
 // threshold for random number, event will be reported when occurence is greater or equal to this number
 #ifndef RAND_TH
-#define RAND_TH 3
+#define RAND_TH 1
 #endif
 
 
