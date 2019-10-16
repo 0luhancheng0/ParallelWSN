@@ -352,7 +352,7 @@ int main(int argc, char *argv[])
         FILE *f = fopen(filename, "w");
 
 		// the header of logfile contains an overview of network
-        char header[500] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
+        char header[800] = "Event detection in a fully distributed wireless sensor network - WSN\n\n";
         int header_p = strlen(header);
         header_p += sprintf(header + header_p, "network configuration overview: \n");
         header_p += sprintf(header + header_p, "Simulation will run %d iterations with %d milliseconds time interval between each pair of consecutive iteration\n", N_ITERATION, INTERVAL);
