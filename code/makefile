@@ -1,8 +1,8 @@
 
 all: run
 # X_SIZE and Y_SIZE control number of nodes in x dimension and y dimension
-X_SIZE?=4
-Y_SIZE?=5
+X_SIZE?=2
+Y_SIZE?=3
 
 # N_BIT_RAND defines how many bits random number generated occpy, controls the probability of event will decrease as it increase. The maximum value is 8 as the type of random number is uint8_t
 N_BIT_RAND?=2
@@ -23,7 +23,7 @@ DEBUG?=0
 wsn: wsn.c WjCryptLib_Aes.c WjCryptLib_AesCtr.c
 	mpicc -DX_SIZE=$(X_SIZE) -DY_SIZE=$(Y_SIZE) -DDEBUG=$(DEBUG) -DN_BIT_RAND=$(N_BIT_RAND) -DINTERVAL=$(INTERVAL) -DN_ITERATION=$(N_ITERATION) -DMESSAGE_LEN=$(MESSAGE_LEN) -o $@ $^ -I. -lm -fopenmp
 run: wsn
-	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))"  ./wsn
+	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))" --oversubscribe ./wsn
 debug: wsn
 	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))"  xterm -e lldb -o run ./wsn.c  ./wsn 
 clean:

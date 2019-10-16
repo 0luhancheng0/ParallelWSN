@@ -363,7 +363,7 @@ int main(int argc, char *argv[])
         for (int i=0; i<global_size;i++) {
             if (i != BASERANK) {
                 printf("%d %d %d %d %d\n",all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
-                header_p += sprintf(header + header_p, "\tprocess rank %d in MPI_COMM_WORLD has local rank %d in sensors communicatior. The coordinate is (%d, %d).%d OpenMP threads are available on this process\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
+                header_p += sprintf(header + header_p, "\tprocess rank %d in MPI_COMM_WORLD has local rank %d in sensors communicatior; The coordinate is (%d, %d); %d OpenMP threads are available on this process\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
             }
         }
         
@@ -389,7 +389,7 @@ int main(int argc, char *argv[])
                 event_p += sprintf(event_details_log + event_p, "Iteration %d\n\n", all_events[i].iteration);
                 perv_iteration = all_events[i].iteration;
             }
-            // event_p += sprintf(event_details_log + event_p, "event number %d detected on local rank %d (rank %d globally) with coordinate (%d, %d)\n", all_events[i].num, all_sensor_summary[all_events[i].reference_rank].local_rank, all_sensor_summary[all_events[i].reference_rank].global_rank, all_sensor_summary[all_events[i].reference_rank].coordinate[0], all_sensor_summary[all_events[i].reference_rank].coordinate[1]);
+            event_p += sprintf(event_details_log + event_p, "event number %d detected on local rank %d (rank %d globally) with coordinate (%d, %d)\n", all_events[i].num, all_sensor_summary[all_events[i].reference_rank].local_rank, all_sensor_summary[all_events[i].reference_rank].global_rank, all_sensor_summary[all_events[i].reference_rank].coordinate[0], all_sensor_summary[all_events[i].reference_rank].coordinate[1]);
 
             event_p += sprintf(event_details_log + event_p, "Timestamp : %s", asctime(localtime(&all_events[i].timestamp)));
             event_p += sprintf(event_details_log + event_p, "adjacent nodes are (local): ");
