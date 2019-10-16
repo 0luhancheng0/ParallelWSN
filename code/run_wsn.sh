@@ -8,4 +8,4 @@
 hostname
 module load mpip
 make build
-make run OMP_NUM_THREADS=2
+make run
