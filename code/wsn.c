@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 		sensor_summary.global_rank = global_rank;
         sensor_summary.local_rank = rank;
         memcpy(&sensor_summary.coordinate[0], &coord[0], sizeof(int) * 2);
-        sensor_summary.threads_num = omp_get_num_threads();
+        sensor_summary.threads_num = omp_get_max_threads();
         
 
 
@@ -362,7 +362,7 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "process and topology summary: \n");
         for (int i=0; i<global_size;i++) {
             if (i != BASERANK) {
-                header_p += sprintf(header + header_p, "\trank %d in MPI_COMM_WORLD has local rank %d in local communicatior;\n\t\tCoordinate is (%d, %d)\n\t\tThreads number: %d\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
+                header_p += sprintf(header + header_p, "\trank %d in MPI_COMM_WORLD has local rank %d in local communicatior;\n\t\tCoordinate is (%d, %d)\n\t\tMaximum threads: %d\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
             }
         }
         
