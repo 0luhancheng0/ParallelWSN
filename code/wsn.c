@@ -358,7 +358,14 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "Simulation will run %d iterations with %d milliseconds time interval between each pair of consecutive iteration\n", N_ITERATION, INTERVAL);
         header_p += sprintf(header + header_p, "Network have %d nodes in X dimension and %d nodes in Y dimension\n", X_SIZE, Y_SIZE);
         header_p += sprintf(header + header_p, "The size of random number is %d bits, which indicate event number is bound by range [0, %d)\n", N_BIT_RAND, 1 << N_BIT_RAND);
-        header_p += sprintf(header + header_p, "details of nodes involved in communication:\n");
+        header_p += sprintf(header + header_p, "process and topology summary: \n");
+        for (int i=0; i<global_size;i++) {
+            if (i != BASERANK) {
+                header_p += sprintf(header + header_p, "\tprocess rank %d in MPI_COMM_WORLD has local rank %d in sensors communicatior. The coordinate is (%d, %d). %d OpenMP threads are available on this process\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
+            }
+        }
+        
+        header_p += sprintf(header + header_p, "details of communication:\n");
         header_p += sprintf(header + header_p, "event activation summary: \n");
 		for (int i=0;i<upperbound;i++) {
 			header_p += sprintf(header + header_p, "\tevent %d is activated %d times\n", i, event_activation_num[i]);
@@ -379,10 +386,10 @@ int main(int argc, char *argv[])
                 event_p += sprintf(event_details_log + event_p, "Iteration %d\n\n", all_events[i].iteration);
                 perv_iteration = all_events[i].iteration;
             }
-            event_p += sprintf(event_details_log + event_p, "event number %d detected on rank %d (rank %d locally) with coordinate (%d, %d)\n", all_events[i].num, all_sensor_summary[all_events[i].reference_rank].global_rank, all_sensor_summary[all_events[i].reference_rank].local_rank, all_sensor_summary[all_events[i].reference_rank].coordinate[0], all_sensor_summary[all_events[i].reference_rank].coordinate[1]);
+            event_p += sprintf(event_details_log + event_p, "event number %d detected on local rank %d (rank %d globally) with coordinate (%d, %d)\n", all_events[i].num, all_sensor_summary[all_events[i].reference_rank].local_rank, all_sensor_summary[all_events[i].reference_rank].global_rank, all_sensor_summary[all_events[i].reference_rank].coordinate[0], all_sensor_summary[all_events[i].reference_rank].coordinate[1]);
 
             event_p += sprintf(event_details_log + event_p, "Timestamp : %s", asctime(localtime(&all_events[i].timestamp)));
-            event_p += sprintf(event_details_log + event_p, "adjacent nodes are : ");
+            event_p += sprintf(event_details_log + event_p, "adjacent nodes are (local): ");
             for (int j=0;j<all_events[i].n_times;j++) {
                 event_p += sprintf(event_details_log + event_p, "%d ", all_events[i].occur_on_ranks[j]);
             }
