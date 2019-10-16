@@ -31,6 +31,6 @@ run: wsn
 debug: wsn
 	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))"  xterm -e lldb -o run ./wsn.c  ./wsn 
 clean:
-	rm -rf wsn *.mpiP  logfile*.txt
+	rm -rf wsn *.mpiP  logfile*.txt a.out slurm*.out
 
 
