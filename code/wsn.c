@@ -308,7 +308,13 @@ int main(int argc, char *argv[])
 		}
 
 		// create logfile
-        char filename[] = "log.txt";
+		time_t now = time(NULL);
+		struct tm* localt = localtime(&now);
+		
+		char filename[50];
+		strftime(filename, 50, "%H_%M_%S", localt);
+        // filename = asctime(localtime(&now));
+		
         FILE *f = fopen(filename, "w");
 
 		// the header of logfile contains an overview of network
@@ -318,7 +324,7 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "Simulation will run %d iterations with %d milliseconds time interval between each pair of consecutive iteration\n", N_ITERATION, INTERVAL);
         header_p += sprintf(header + header_p, "Network have %d nodes in X dimension and %d nodes in Y dimension\n", X_SIZE, Y_SIZE);
         header_p += sprintf(header + header_p, "The size of random number is %d bits, which indicate event number is bound by range [0, %d)\n", N_BIT_RAND, 1 << N_BIT_RAND);
-
+        header_p += sprintf(header + header_p, "details of nodes involved in communication:\n");
         header_p += sprintf(header + header_p, "event activation summary: \n");
 		for (int i=0;i<upperbound;i++) {
 			header_p += sprintf(header + header_p, "\tevent %d is activated %d times\n", i, event_activation_num[i]);
@@ -329,7 +335,6 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
-        header_p += sprintf(header + header_p, "details of nodes involved in communication:\n");
 
 		// write log for received event details
         char *event_details_log = malloc(total_event_num*sizeof(char)*300);

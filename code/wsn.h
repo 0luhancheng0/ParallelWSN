@@ -10,7 +10,7 @@
 #ifndef BASERANK
 #define BASERANK 0
 #endif
-// the number of bits each random number have, which also defines the upper bound of random number as 2^n-1, maximum 4byte (32 bit)
+// the number of bits each random number have, which also defines the upper bound of random number as 2^n-1, maximum 8 bits
 #ifndef N_BIT_RAND
 #define N_BIT_RAND 2
 #endif
@@ -22,7 +22,7 @@
 #ifndef INTERVAL
 #define INTERVAL 1
 #endif
-// length of message in bytes after padding precending 0s must be greater than N_BIT_RAND / 8. IT ALSO NEED TO BE MULTIPLE OF KEYSIZE
+// length of message
 #ifndef MESSAGE_LEN
 #define MESSAGE_LEN 1024
 #endif
