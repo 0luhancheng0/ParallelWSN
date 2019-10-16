@@ -362,7 +362,7 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "process and topology summary: \n");
         for (int i=0; i<global_size;i++) {
             if (i != BASERANK) {
-                header_p += sprintf(header + header_p, "\tprocess rank %d in MPI_COMM_WORLD has local rank %d in sensors communicatior; The coordinate is (%d, %d); %d OpenMP threads are available on this process\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
+                header_p += sprintf(header + header_p, "\trank %d in MPI_COMM_WORLD has local rank %d in local communicatior;\n\tCoordinate is (%d, %d)\n\tThreads number: %d\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
             }
         }
         

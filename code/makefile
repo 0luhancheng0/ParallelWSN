@@ -23,7 +23,7 @@ DEBUG?=0
 wsn: wsn.c WjCryptLib_Aes.c WjCryptLib_AesCtr.c
 	mpicc -DX_SIZE=$(X_SIZE) -DY_SIZE=$(Y_SIZE) -DDEBUG=$(DEBUG) -DN_BIT_RAND=$(N_BIT_RAND) -DINTERVAL=$(INTERVAL) -DN_ITERATION=$(N_ITERATION) -DMESSAGE_LEN=$(MESSAGE_LEN) -o $@ $^ -I. -lm -fopenmp
 run: wsn
-	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))" --oversubscribe ./wsn
+	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))" ./wsn
 debug: wsn
 	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))"  xterm -e lldb -o run ./wsn.c  ./wsn 
 clean:
