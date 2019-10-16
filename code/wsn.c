@@ -312,9 +312,10 @@ int main(int argc, char *argv[])
 		struct tm* localt = localtime(&now);
 		
 		char filename[50];
-		strftime(filename, 50, "%H_%M_%S", localt);
+		int tmp = sprintf(filename, "logfile_");
+		tmp += strftime(&filename[tmp], 50-tmp, "%H_%M_%S", localt);
         // filename = asctime(localtime(&now));
-		
+		sprintf(&filename[tmp], ".txt");
         FILE *f = fopen(filename, "w");
 
 		// the header of logfile contains an overview of network

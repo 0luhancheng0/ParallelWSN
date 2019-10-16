@@ -27,6 +27,6 @@ run: wsn
 debug: wsn
 	mpirun -n "$$(( $(X_SIZE) * $(Y_SIZE) + 1 ))" --oversubscribe xterm -e lldb -o run ./wsn.c  ./wsn 
 clean:
-	rm -rf wsn *.mpiP  log.txt
+	rm -rf wsn *.mpiP  logfile*.txt
 
 
