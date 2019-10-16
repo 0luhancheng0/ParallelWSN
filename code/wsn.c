@@ -378,8 +378,10 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
+        fwrite(header, sizeof(char), header_p, f);
+        free(header);
 
-		// write log for received event details
+        // write log for received event details
         char *event_details_log = malloc(total_event_num*sizeof(char)*200);
         int event_p = 0;
         int perv_iteration = -1;
@@ -401,7 +403,7 @@ int main(int argc, char *argv[])
             event_p += sprintf(event_details_log + event_p, "\n");
         }
 
-        fwrite(header, sizeof(char), header_p, f);
+        
         fwrite(event_details_log, sizeof(char), event_p, f);
         
         fclose(f);
