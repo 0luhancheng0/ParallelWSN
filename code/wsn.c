@@ -360,11 +360,12 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "Network have %d nodes in X dimension and %d nodes in Y dimension\n", X_SIZE, Y_SIZE);
         header_p += sprintf(header + header_p, "The size of random number is %d bits, which indicate event number is bound by range [0, %d)\n", N_BIT_RAND, 1 << N_BIT_RAND);
         header_p += sprintf(header + header_p, "process and topology summary: \n");
-        // for (int i=0; i<global_size;i++) {
-        //     if (i != BASERANK) {
-        //         header_p += sprintf(header + header_p, "\tprocess rank %d in MPI_COMM_WORLD has local rank %d in sensors communicatior. The coordinate is (%d, %d). %d OpenMP threads are available on this process\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
-        //     }
-        // }
+        for (int i=0; i<global_size;i++) {
+            if (i != BASERANK) {
+                printf("%d %d %d %d %d\n",all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
+                // header_p += sprintf(header + header_p, "\tprocess rank %d in MPI_COMM_WORLD has local rank %d in sensors communicatior. The coordinate is (%d, %d).%d OpenMP threads are available on this process\n", all_sensor_summary[i].global_rank, all_sensor_summary[i].local_rank, all_sensor_summary[i].coordinate[0], all_sensor_summary[i].coordinate[1], all_sensor_summary[i].threads_num);
+            }
+        }
         
         header_p += sprintf(header + header_p, "details of communication:\n");
         header_p += sprintf(header + header_p, "event activation summary: \n");
