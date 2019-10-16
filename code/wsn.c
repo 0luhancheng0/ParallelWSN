@@ -326,7 +326,7 @@ int main(int argc, char *argv[])
 		// write log for received event details
         char *event_details_log = malloc(total_event_num*sizeof(char)*300);
         int event_p = 0;
-        int perv_iteration = 0;
+        int perv_iteration = -1;
         for (int i=0;i<total_event_num;i++) {
             if (all_events[i].iteration != perv_iteration) {
                 event_p += sprintf(event_details_log + event_p, "Iteration %d\n\n", all_events[i].iteration);

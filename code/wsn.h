@@ -12,11 +12,11 @@
 #endif
 // the number of bits each random number have, which also defines the upper bound of random number as 2^n-1, maximum 4byte (32 bit)
 #ifndef N_BIT_RAND
-#define N_BIT_RAND 1
+#define N_BIT_RAND 2
 #endif
 // run N_INTERATION number times
 #ifndef N_ITERATION
-#define N_ITERATION 20
+#define N_ITERATION 200
 #endif
 // run sleep ITERVAL millisecond each iteration
 #ifndef INTERVAL
