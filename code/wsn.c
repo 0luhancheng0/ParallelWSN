@@ -378,8 +378,7 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
-        fwrite(header, sizeof(char), header_p, f);
-        free(&header);
+        
 
         // write log for received event details
         char *event_details_log = malloc(total_event_num*sizeof(char)*200);
@@ -390,7 +389,7 @@ int main(int argc, char *argv[])
                 event_p += sprintf(event_details_log + event_p, "Iteration %d\n\n", all_events[i].iteration);
                 perv_iteration = all_events[i].iteration;
             }
-            event_p += sprintf(event_details_log + event_p, "event number %d detected on local rank %d (rank %d globally) with coordinate (%d, %d)\n", all_events[i].num, all_sensor_summary[all_events[i].reference_rank].local_rank, all_sensor_summary[all_events[i].reference_rank].global_rank, all_sensor_summary[all_events[i].reference_rank].coordinate[0], all_sensor_summary[all_events[i].reference_rank].coordinate[1]);
+            // event_p += sprintf(event_details_log + event_p, "event number %d detected on local rank %d (rank %d globally) with coordinate (%d, %d)\n", all_events[i].num, all_sensor_summary[all_events[i].reference_rank].local_rank, all_sensor_summary[all_events[i].reference_rank].global_rank, all_sensor_summary[all_events[i].reference_rank].coordinate[0], all_sensor_summary[all_events[i].reference_rank].coordinate[1]);
 
             event_p += sprintf(event_details_log + event_p, "Timestamp : %s", asctime(localtime(&all_events[i].timestamp)));
             event_p += sprintf(event_details_log + event_p, "adjacent nodes are (local): ");
@@ -403,7 +402,7 @@ int main(int argc, char *argv[])
             event_p += sprintf(event_details_log + event_p, "\n");
         }
 
-        
+        fwrite(header, sizeof(char), header_p, f);
         fwrite(event_details_log, sizeof(char), event_p, f);
         
         fclose(f);
