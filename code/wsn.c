@@ -379,7 +379,7 @@ int main(int argc, char *argv[])
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
         fwrite(header, sizeof(char), header_p, f);
-        free(header);
+        free(&header);
 
         // write log for received event details
         char *event_details_log = malloc(total_event_num*sizeof(char)*200);
