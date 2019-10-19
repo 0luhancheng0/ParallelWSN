@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
 			#if PRINT_MESSAGE
             if (global_rank == 1)
             {
-                printf("message on rank %d before encryption: \n", global_rank);
+                printf("message on rank %d after encryption: \n", global_rank);
                 for (int i = 0; i < MESSAGE_LEN; i++)
                 {
                     printf("%x", message[i]);
