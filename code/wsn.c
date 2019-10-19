@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 	int simulation_completion[X_SIZE * Y_SIZE+1] = {-1};
 	MPI_Request base_comm_reqs[(X_SIZE * Y_SIZE+1)*2];
     double tick, encryption_time, decryption_time, t0;
-    int global_size, global_rank, size, rank, nneighbor;
+    int global_size, global_rank, size, local_rank, nneighbor;
     uint8_t random_num;
     uint8_t* message;
     MPI_Comm node_comm;
@@ -134,19 +134,19 @@ int main(int argc, char *argv[])
 
         // create group for inter node communication
         MPI_Comm_create_group(MPI_COMM_WORLD, node_group, 0, &node_comm);
-        MPI_Group_rank(node_group, &rank);
+        MPI_Group_rank(node_group, &local_rank);
         MPI_Group_size(node_group, &size);
 
         // create cart topology
         MPI_Cart_create(node_comm, 2, dim, period, reorder, &node_comm);
 
 		// get coordinate in cart
-        MPI_Cart_coords(node_comm, rank, 2, coord);
+        MPI_Cart_coords(node_comm, local_rank, 2, coord);
         get_neighbor_count(coord, &nneighbor);
 
 		// create sensor summary
 		sensor_summary.global_rank = global_rank;
-        sensor_summary.local_rank = rank;
+        sensor_summary.local_rank = local_rank;
         memcpy(&sensor_summary.coordinate[0], &coord[0], sizeof(int) * 2);
         sensor_summary.threads_num = omp_get_max_threads();
         
