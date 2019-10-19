@@ -24,7 +24,7 @@ PRINT_MESSAGE?=0
 wsn: wsn.c WjCryptLib_Aes.c WjCryptLib_AesCtr.c
 	mpicc -DX_SIZE=$(X) -DY_SIZE=$(Y) -DDEBUG=$(DEBUG) -DN_BIT_RAND=$(N_BIT_RAND) -DINTERVAL=$(INTERVAL) -DN_ITERATION=$(N_ITERATION) -DMESSAGE_LEN=$(MESSAGE_LEN) -DPRINT_MESSAGE=$(PRINT_MESSAGE) -o $@ $^ -I. -lm -fopenmp
 run: wsn
-	 mpirun -n "$$(( $(X) * $(Y) + 1 ))" -x OMP_NUM_THREADS=$(OMP_NUM_THREADS) ./wsn
+	mpirun -n "$$(( $(X) * $(Y) + 1 ))" -x OMP_NUM_THREADS=$(OMP_NUM_THREADS) ./wsn
 debug: wsn
 	mpirun -n "$$(( $(X) * $(Y) + 1 ))" --oversubscribe xterm -e lldb -o run ./wsn.c  ./wsn 
 clean:
