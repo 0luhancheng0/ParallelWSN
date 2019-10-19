@@ -7,4 +7,5 @@
 #SBATCH --time=00:20:00
 hostname
 module load mpip
+export OMP_NUM_THREADS=2  
 make run MESSAGE_LEN=32768 X=4 Y=5 N_ITERATION=2000 N_BIT_RAND=3 INTERVAL=10 
