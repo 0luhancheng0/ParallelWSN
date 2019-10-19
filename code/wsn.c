@@ -10,7 +10,9 @@
 #include "wsn.h"
 #include <omp.h>
 #include "WjCryptLib_AesCtr.h"
-
+#ifndef PRINT_MESSAGE
+#define PRINT_MESSAGE 0
+#endif
 #ifndef DEBUG
 #define DEBUG 0
 #endif
@@ -177,12 +179,36 @@ int main(int argc, char *argv[])
             // add padding of zeros following random num
             message[0] = random_num;
 
+			#if PRINT_MESSAGE
+            if (global_rank ==1) {
+                printf("message on rank %d before encryption: \n", global_rank);
+                for (int i = 0; i < MESSAGE_LEN; i++)
+                {
+                    printf("%x", message[i]);
+                }
+                printf("\n");
+            }
+
+			
+			#endif
+
 			// encryption
             t0 = MPI_Wtime(); 
             // xor_encrypt(message, message, MESSAGE_LEN * sizeof(int));
 			AesCtrXor(&ctx, message, message, MESSAGE_LEN);
 			AesCtrSetStreamIndex(&ctx, 0);
             encryption_time = MPI_Wtime() - t0;
+			#if PRINT_MESSAGE
+            if (global_rank == 1)
+            {
+                printf("message on rank %d before encryption: \n", global_rank);
+                for (int i = 0; i < MESSAGE_LEN; i++)
+                {
+                    printf("%x", message[i]);
+                }
+                printf("\n");
+            }
+            #endif 
 
 			// inter node communication
             for (int i=0, dim=0; dim<2; ++dim) {
@@ -372,7 +398,7 @@ int main(int argc, char *argv[])
 		}
 
 
-        header_p += sprintf(header + header_p, "For each activation: \n\tencryption time : %lf seconds\n\tdecryption time : %lf seconds\n", encryption_time, decryption_time);
+        header_p += sprintf(header + header_p, "\ttotal encryption time : %lf seconds\n\ttotal decryption time : %lf seconds\n", encryption_time, decryption_time);
         header_p += sprintf(header + header_p, "number of message pass between base station and nodes : %d\n", total_event_num + X_SIZE * Y_SIZE);
         header_p += sprintf(header + header_p, "number of message passing happened among nodes: %d\n", (X_SIZE * (Y_SIZE - 1) + Y_SIZE * (X_SIZE - 1)) * 2 * N_ITERATION);
         header_p += sprintf(header + header_p, "total events detected: %d\n\n", total_event_num);
