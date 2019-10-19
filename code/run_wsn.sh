@@ -7,6 +7,5 @@
 #SBATCH --time=00:20:00
 hostname
 module load mpip
-# make build
-make wsn MESSAGE_LEN=32768 X_SIZE=4 Y_SIZE=5 N_ITERATION=2000
+make wsn MESSAGE_LEN=32768 X=4 Y=5 N_ITERATION=2000 N_BIT_RAND=3 INTERVAL=10
 make run 

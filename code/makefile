@@ -28,6 +28,6 @@ run: wsn
 debug: wsn
 	mpirun -n "$$(( $(X) * $(Y) + 1 ))" --oversubscribe xterm -e lldb -o run ./wsn.c  ./wsn 
 clean:
-	rm -rf wsn *.mpiP  logfile*.txt a.out slurm*.out
+	rm -rf wsn *.mpiP  logfile*.txt a.out slurm*.out smux*.out
 
 
