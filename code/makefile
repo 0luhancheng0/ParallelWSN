@@ -3,7 +3,7 @@ all: run
 # X and Y control number of nodes in x dimension and y dimension
 X?=2
 Y?=3
-
+OMP_NUM_THREADS?=1
 # N_BIT_RAND defines how many bits random number generated occpy, controls the probability of event will decrease as it increase. The maximum value is 8 as the type of random number is uint8_t
 N_BIT_RAND?=2
 
@@ -26,7 +26,7 @@ wsn: wsn.c WjCryptLib_Aes.c WjCryptLib_AesCtr.c
 run: wsn
 	mpirun -n "$$(( $(X) * $(Y) + 1 ))" --oversubscribe ./wsn
 debug: wsn
-	mpirun -n "$$(( $(X) * $(Y) + 1 ))" --oversubscribe xterm -e lldb -o run ./wsn.c  ./wsn 
+	OMP_NUM_THREADS=$(OMP_NUM_THREADS) mpirun -n "$$(( $(X) * $(Y) + 1 ))" --oversubscribe xterm -e lldb -o run ./wsn.c  ./wsn 
 clean:
 	rm -rf wsn *.mpiP  logfile*.txt a.out slurm*.out smux*.out
 
