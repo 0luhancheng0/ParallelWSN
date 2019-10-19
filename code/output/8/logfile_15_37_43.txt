@@ -1,0 +1,5815 @@
+Event detection in a fully distributed wireless sensor network - WSN
+
+network configuration overview: 
+Simulation will run 2000 iterations with 10 milliseconds time interval between each pair of consecutive iteration
+Network have 4 nodes in X dimension and 5 nodes in Y dimension
+The size of random number is 3 bits, which indicate event number is bound by range [0, 8)
+process and topology summary: 
+	rank 1 in MPI_COMM_WORLD has local rank 0 in local communicatior;
+		Coordinate is (0, 0)
+		Maximum threads: 8
+	rank 2 in MPI_COMM_WORLD has local rank 1 in local communicatior;
+		Coordinate is (0, 1)
+		Maximum threads: 8
+	rank 3 in MPI_COMM_WORLD has local rank 2 in local communicatior;
+		Coordinate is (0, 2)
+		Maximum threads: 8
+	rank 4 in MPI_COMM_WORLD has local rank 3 in local communicatior;
+		Coordinate is (0, 3)
+		Maximum threads: 8
+	rank 5 in MPI_COMM_WORLD has local rank 4 in local communicatior;
+		Coordinate is (0, 4)
+		Maximum threads: 8
+	rank 6 in MPI_COMM_WORLD has local rank 5 in local communicatior;
+		Coordinate is (1, 0)
+		Maximum threads: 8
+	rank 7 in MPI_COMM_WORLD has local rank 6 in local communicatior;
+		Coordinate is (1, 1)
+		Maximum threads: 8
+	rank 8 in MPI_COMM_WORLD has local rank 7 in local communicatior;
+		Coordinate is (1, 2)
+		Maximum threads: 8
+	rank 9 in MPI_COMM_WORLD has local rank 8 in local communicatior;
+		Coordinate is (1, 3)
+		Maximum threads: 8
+	rank 10 in MPI_COMM_WORLD has local rank 9 in local communicatior;
+		Coordinate is (1, 4)
+		Maximum threads: 8
+	rank 11 in MPI_COMM_WORLD has local rank 10 in local communicatior;
+		Coordinate is (2, 0)
+		Maximum threads: 8
+	rank 12 in MPI_COMM_WORLD has local rank 11 in local communicatior;
+		Coordinate is (2, 1)
+		Maximum threads: 8
+	rank 13 in MPI_COMM_WORLD has local rank 12 in local communicatior;
+		Coordinate is (2, 2)
+		Maximum threads: 8
+	rank 14 in MPI_COMM_WORLD has local rank 13 in local communicatior;
+		Coordinate is (2, 3)
+		Maximum threads: 8
+	rank 15 in MPI_COMM_WORLD has local rank 14 in local communicatior;
+		Coordinate is (2, 4)
+		Maximum threads: 8
+	rank 16 in MPI_COMM_WORLD has local rank 15 in local communicatior;
+		Coordinate is (3, 0)
+		Maximum threads: 8
+	rank 17 in MPI_COMM_WORLD has local rank 16 in local communicatior;
+		Coordinate is (3, 1)
+		Maximum threads: 8
+	rank 18 in MPI_COMM_WORLD has local rank 17 in local communicatior;
+		Coordinate is (3, 2)
+		Maximum threads: 8
+	rank 19 in MPI_COMM_WORLD has local rank 18 in local communicatior;
+		Coordinate is (3, 3)
+		Maximum threads: 8
+	rank 20 in MPI_COMM_WORLD has local rank 19 in local communicatior;
+		Coordinate is (3, 4)
+		Maximum threads: 8
+details of communication:
+event activation summary: 
+	event 0 is activated 129 times
+	event 1 is activated 136 times
+	event 2 is activated 127 times
+	event 3 is activated 119 times
+	event 4 is activated 133 times
+	event 5 is activated 122 times
+	event 6 is activated 132 times
+	event 7 is activated 150 times
+	total encryption time : 7.698206 seconds
+	total decryption time : 16.056965 seconds
+number of message pass between base station and nodes : 1068
+number of message passing happened among nodes: 124000
+total events detected: 1048
+
+Iteration 0
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:38 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 5
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 13 7 9 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 7
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 10
+
+event number 7 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 8 18 14 
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 11
+
+event number 5 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 13
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 16
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 18
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 13 7 9 
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:39 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 21
+
+event number 0 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 23
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 24
+
+event number 1 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 28
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 29
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 31
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 30
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 31
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 35
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:40 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 38
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:41 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 42
+
+event number 0 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:35:41 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 44
+
+event number 7 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:35:41 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 47
+
+event number 7 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:41 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 50
+
+event number 7 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:35:41 2019
+adjacent nodes are (local): 9 19 13 
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:41 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 53
+
+event number 4 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 55
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 1 11 7 
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 57
+
+event number 3 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 2 12 6 8 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 62
+
+event number 4 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:42 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 67
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:43 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:43 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 68
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:43 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 70
+
+event number 2 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:35:43 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 74
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:43 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 76
+
+event number 7 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:35:43 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:43 2019
+adjacent nodes are (local): 6 16 10 12 
+
+Iteration 84
+
+event number 0 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:35:44 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 85
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:44 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 93
+
+event number 3 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:35:44 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 95
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:44 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 96
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:44 2019
+adjacent nodes are (local): 7 17 11 13 
+
+Iteration 102
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 103
+
+event number 4 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 104
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 105
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 110
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 113
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 114
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 116
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 117
+
+event number 5 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:45 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 6 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 5 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 119
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 121
+
+event number 1 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 122
+
+event number 6 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 123
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 126
+
+event number 3 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 131
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:46 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 132
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 134
+
+event number 2 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 135
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 136
+
+event number 7 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 137
+
+event number 3 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 3 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 2 12 6 8 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 141
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 142
+
+event number 5 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 146
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:47 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 147
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 149
+
+event number 3 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 150
+
+event number 1 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 7 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 7 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 151
+
+event number 6 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 155
+
+event number 5 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 157
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 2 12 8 
+
+event number 1 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 158
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 159
+
+event number 4 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 160
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 162
+
+event number 0 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 0 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:35:48 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 167
+
+event number 6 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 169
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 171
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 172
+
+event number 6 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 173
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 175
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 7 11 13 
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 177
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:49 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 180
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:50 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 181
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:50 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 182
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:50 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 183
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:50 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 184
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:50 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 185
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:50 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 187
+
+event number 2 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:35:50 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 188
+
+event number 4 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:35:50 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 198
+
+event number 0 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:35:51 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 201
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:51 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 202
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:51 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 205
+
+event number 2 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:35:51 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 206
+
+event number 2 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:35:51 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:51 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 212
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 214
+
+event number 2 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 215
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 216
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 217
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 219
+
+event number 6 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 220
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 221
+
+event number 2 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 222
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 223
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 229
+
+event number 5 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 228
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 229
+
+event number 4 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:35:52 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 230
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 234
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 236
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 237
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 6 16 12 
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 239
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 243
+
+event number 4 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 6 16 10 12 
+
+Iteration 244
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:53 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 247
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:54 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 250
+
+event number 4 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:35:54 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 251
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:54 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 256
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:54 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 257
+
+event number 7 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:54 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 4 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:35:54 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 261
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 264
+
+event number 7 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 266
+
+event number 0 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 268
+
+event number 7 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 270
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 273
+
+event number 6 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 274
+
+event number 6 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 275
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:55 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 278
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 279
+
+event number 2 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 283
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 287
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 289
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 3 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 3 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 290
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:56 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 298
+
+event number 7 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:35:57 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:57 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 299
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:57 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 300
+
+event number 6 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:35:57 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 304
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:57 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 306
+
+event number 2 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:35:57 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 308
+
+event number 7 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:35:58 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 309
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:58 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 310
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:35:58 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 311
+
+event number 6 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:58 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 315
+
+event number 6 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:35:58 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 316
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:35:58 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 327
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:35:59 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 328
+
+event number 2 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:35:59 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 332
+
+event number 2 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:35:59 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 333
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:35:59 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 335
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:35:59 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 346
+
+event number 0 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:00 2019
+adjacent nodes are (local): 9 19 13 
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:00 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 352
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:00 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 354
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:00 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 355
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:00 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 357
+
+event number 5 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:00 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 359
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:01 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 364
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:01 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 365
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:01 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 366
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:01 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 367
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:01 2019
+adjacent nodes are (local): 7 17 13 
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:01 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 368
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:01 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 371
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:01 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 376
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:02 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 378
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:02 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 379
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:02 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 380
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:02 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 384
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:02 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:02 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:02 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 389
+
+event number 3 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 390
+
+event number 7 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 7 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 9 19 13 
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 7 17 13 
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 400
+
+event number 7 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 399
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 401
+
+event number 2 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 404
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:03 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 405
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 406
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 407
+
+event number 4 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 408
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 409
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 2 12 6 8 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 410
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 416
+
+event number 4 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 419
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 420
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:04 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 426
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:05 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 429
+
+event number 6 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:05 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 431
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:05 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 433
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:05 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:05 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 441
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:06 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 445
+
+event number 3 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:06 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 446
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:06 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 447
+
+event number 2 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:06 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 448
+
+event number 3 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:06 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 4 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:06 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 4 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:06 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 452
+
+event number 1 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:06 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 456
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:07 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 457
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:07 2019
+adjacent nodes are (local): 7 17 13 
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:07 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 460
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:07 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 461
+
+event number 7 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:07 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 467
+
+event number 6 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:36:07 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 4 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:07 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 470
+
+event number 1 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:08 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 472
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:08 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 476
+
+event number 7 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:08 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:08 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 478
+
+event number 4 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:08 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 481
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:08 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 482
+
+event number 5 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:08 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 488
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 489
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 490
+
+event number 3 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 495
+
+event number 5 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 496
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 2 12 8 
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 498
+
+event number 1 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 500
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:09 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 503
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:10 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 507
+
+event number 6 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:10 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:10 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 510
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:10 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 511
+
+event number 4 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:10 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 513
+
+event number 3 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:10 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 515
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:10 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 520
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 521
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 1 5 7 
+
+event number 7 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 524
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 523
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 525
+
+event number 2 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 528
+
+event number 5 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 529
+
+event number 4 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 530
+
+event number 0 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 533
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 7 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:11 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 535
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 537
+
+event number 1 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 540
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 546
+
+event number 2 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 548
+
+event number 1 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 549
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 550
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:12 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 552
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 556
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 558
+
+event number 2 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 559
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 565
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 3 13 9 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 567
+
+event number 3 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 568
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:13 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 569
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:14 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 572
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:14 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 577
+
+event number 7 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:14 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:14 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 578
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:14 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 577
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:14 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 580
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:14 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 586
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:15 2019
+adjacent nodes are (local): 18 12 14 
+
+event number 4 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:15 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 587
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:15 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 590
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:15 2019
+adjacent nodes are (local): 13 7 9 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:15 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 594
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:15 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 601
+
+event number 2 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:16 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 604
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:16 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 605
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:16 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 611
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:16 2019
+adjacent nodes are (local): 8 18 14 
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:16 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 612
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:16 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 616
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:17 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 621
+
+event number 3 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:17 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 622
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:17 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 634
+
+event number 6 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:17 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:17 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 636
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 638
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 639
+
+event number 0 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 640
+
+event number 6 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 641
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 646
+
+event number 0 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 647
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 0 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 648
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:18 2019
+adjacent nodes are (local): 8 18 12 14 
+
+Iteration 651
+
+event number 2 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:19 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 653
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:19 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 656
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:19 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 657
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:19 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 659
+
+event number 5 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:19 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 663
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:19 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 668
+
+event number 7 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 5 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 670
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 671
+
+event number 0 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 673
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 674
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 676
+
+event number 7 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 678
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 681
+
+event number 6 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:20 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 683
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 1 11 7 
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 684
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 686
+
+event number 5 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 687
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 688
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 689
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 1 5 7 
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 691
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 694
+
+event number 6 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 697
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:21 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 702
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 703
+
+event number 2 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 704
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 707
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 706
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 13 7 9 
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 707
+
+event number 2 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 708
+
+event number 4 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 710
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 712
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 713
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 714
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:22 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 715
+
+event number 2 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:23 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 716
+
+event number 2 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:23 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:23 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 718
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:23 2019
+adjacent nodes are (local): 6 16 10 12 
+
+Iteration 730
+
+event number 2 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:24 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 732
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:24 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 733
+
+event number 2 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:24 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 737
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:24 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 738
+
+event number 5 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:24 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 3 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:24 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 745
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:25 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 746
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:25 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 747
+
+event number 3 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:25 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:25 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 748
+
+event number 1 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:36:25 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 750
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:25 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 753
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:25 2019
+adjacent nodes are (local): 1 11 5 
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:25 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 761
+
+event number 2 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:26 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:26 2019
+adjacent nodes are (local): 1 11 7 
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:26 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 762
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:26 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 768
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:26 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 777
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:27 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 780
+
+event number 6 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:27 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 790
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:28 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:28 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 792
+
+event number 2 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:28 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:28 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 798
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:28 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 801
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:28 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 804
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 806
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 8 18 12 14 
+
+Iteration 808
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 813
+
+event number 0 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 816
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 817
+
+event number 2 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 818
+
+event number 6 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 6 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 5 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 18 12 14 
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 819
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:29 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 824
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 4 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 9 19 13 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 826
+
+event number 4 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 828
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 831
+
+event number 6 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 834
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 835
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:30 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 839
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 840
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 844
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 7 11 13 
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 845
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 7 17 11 
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 847
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 848
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 3 13 7 9 
+
+Iteration 850
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 1 5 7 
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 851
+
+event number 5 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:31 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 855
+
+event number 7 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 854
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 855
+
+event number 7 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 856
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 859
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 860
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 861
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 863
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 864
+
+event number 4 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 866
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 868
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:32 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 874
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:33 2019
+adjacent nodes are (local): 7 17 13 
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:33 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 886
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:33 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 888
+
+event number 4 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 890
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 891
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 892
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 1 11 7 
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 899
+
+event number 7 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 900
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 901
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:34 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 905
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:35 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 906
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:35 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 910
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:35 2019
+adjacent nodes are (local): 1 11 5 
+
+event number 2 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:35 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 912
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:35 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 915
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:35 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 916
+
+event number 2 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:35 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 917
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:35 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 920
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:36 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 921
+
+event number 3 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:36 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 923
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:36 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 931
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:36 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 933
+
+event number 6 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:36 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 937
+
+event number 6 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 936
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 937
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 6 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 938
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 939
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 940
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 941
+
+event number 2 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 1 11 7 
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 13 7 9 
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 7 11 13 
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 947
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 6 10 12 
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 948
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 950
+
+event number 1 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:37 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 952
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 953
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 954
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 955
+
+event number 4 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 959
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 960
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 962
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 967
+
+event number 4 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:38 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 968
+
+event number 3 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:39 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:39 2019
+adjacent nodes are (local): 8 18 12 14 
+
+Iteration 969
+
+event number 1 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:39 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 970
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:39 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 976
+
+event number 3 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:39 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 977
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:39 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 978
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:39 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 979
+
+event number 5 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:39 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 985
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 987
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 988
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 991
+
+event number 6 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 6 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 992
+
+event number 2 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 993
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 995
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 2 6 8 
+
+event number 1 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 996
+
+event number 2 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 2 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 999
+
+event number 3 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:40 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 1002
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:41 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1009
+
+event number 4 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:41 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1012
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:41 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:41 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1013
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:41 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1016
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1017
+
+event number 1 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 1018
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1019
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 6 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1020
+
+event number 0 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1024
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:42 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1029
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1032
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 1036
+
+event number 2 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 0 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 1037
+
+event number 7 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1039
+
+event number 6 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 1040
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1041
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 2 6 8 
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1042
+
+event number 7 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:43 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1047
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 7 11 13 
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1049
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1052
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1053
+
+event number 0 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1054
+
+event number 7 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1057
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1058
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1059
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:44 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1061
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:45 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1064
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:45 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1069
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:45 2019
+adjacent nodes are (local): 1 11 5 7 
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:45 2019
+adjacent nodes are (local): 13 7 9 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:45 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1071
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:45 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1076
+
+event number 7 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:45 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:46 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1079
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:46 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1083
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:46 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:46 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1086
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:46 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1090
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:47 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1095
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:47 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1100
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:47 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1103
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:47 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1106
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:47 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:47 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1111
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:48 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1112
+
+event number 5 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:48 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 1113
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:48 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 1115
+
+event number 1 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:48 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 1117
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:48 2019
+adjacent nodes are (local): 13 7 9 
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:48 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1130
+
+event number 0 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:49 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 1133
+
+event number 2 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:49 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1134
+
+event number 6 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:49 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 1136
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:49 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1138
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:50 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1139
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:50 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 1142
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:50 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 1150
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:50 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1154
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:50 2019
+adjacent nodes are (local): 1 11 7 
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:50 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1156
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:36:51 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:51 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 1165
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:51 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1166
+
+event number 1 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:51 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1167
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:51 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1172
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:52 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1176
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:52 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:52 2019
+adjacent nodes are (local): 7 17 11 13 
+
+Iteration 1181
+
+event number 0 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:52 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 1184
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:52 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1188
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1193
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1194
+
+event number 7 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1195
+
+event number 2 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 9 19 13 
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 6 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1196
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1198
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 6 16 10 12 
+
+Iteration 1199
+
+event number 2 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1201
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:53 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 1206
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:54 2019
+adjacent nodes are (local): 1 11 5 7 
+
+Iteration 1207
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:54 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1215
+
+event number 1 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:54 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:54 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1217
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:54 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1222
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:55 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1223
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:55 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1225
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:55 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1227
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:55 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1228
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:55 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1230
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:55 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1235
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:55 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1237
+
+event number 6 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:56 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:56 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1238
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:36:56 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1240
+
+event number 7 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:56 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1250
+
+event number 0 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:36:56 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 1252
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:57 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:57 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1254
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:57 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1255
+
+event number 5 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:36:57 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:57 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1260
+
+event number 1 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:57 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 1267
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:57 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:58 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1268
+
+event number 5 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:36:58 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1271
+
+event number 2 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:58 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1272
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:58 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1275
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:36:58 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1282
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:59 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1285
+
+event number 1 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:36:59 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:36:59 2019
+adjacent nodes are (local): 18 12 14 
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:36:59 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1286
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:36:59 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1291
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:36:59 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1294
+
+event number 3 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:36:59 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 1300
+
+event number 5 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:37:00 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 1303
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:00 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1306
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:00 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1307
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:00 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1312
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:00 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1321
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:01 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1322
+
+event number 7 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:01 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1323
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:01 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1325
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:01 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1327
+
+event number 5 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:37:01 2019
+adjacent nodes are (local): 9 19 13 
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:01 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1328
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:01 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1330
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1332
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 1334
+
+event number 1 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1336
+
+event number 3 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1337
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 6 16 12 
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1339
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:02 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1350
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:03 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 1354
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:03 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1356
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:03 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 1360
+
+event number 2 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1362
+
+event number 4 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1365
+
+event number 5 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1369
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1370
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1371
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:04 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1375
+
+event number 3 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1379
+
+event number 2 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 4 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 1380
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 1381
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1383
+
+event number 1 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 16 10 12 
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1384
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1387
+
+event number 5 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1389
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:05 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1392
+
+event number 5 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:06 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1393
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:06 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1395
+
+event number 6 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:37:06 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 1397
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:06 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:06 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1400
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:06 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 1403
+
+event number 2 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:06 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:06 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1408
+
+event number 3 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 1411
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 1412
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1413
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 1416
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1417
+
+event number 7 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 17 11 13 
+
+event number 7 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1420
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1421
+
+event number 6 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:07 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1422
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:08 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1423
+
+event number 1 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:08 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1428
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:08 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1429
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:08 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1430
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:08 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1432
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:08 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1437
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:08 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:08 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1439
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:09 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 1443
+
+event number 6 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:09 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 1444
+
+event number 4 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:09 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1446
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:09 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1450
+
+event number 0 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:09 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1453
+
+event number 5 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:09 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1457
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:10 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1458
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:10 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1459
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:10 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 1460
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:10 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1465
+
+event number 3 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:10 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1469
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:10 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:10 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1472
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:11 2019
+adjacent nodes are (local): 7 17 13 
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:11 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1474
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:11 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 1484
+
+event number 4 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:11 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:11 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1489
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:12 2019
+adjacent nodes are (local): 6 16 10 
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:12 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1490
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:12 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1491
+
+event number 7 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:12 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:12 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1494
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:12 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 1496
+
+event number 7 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:12 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 1501
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:12 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1502
+
+event number 3 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 1504
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1505
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1510
+
+event number 2 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 1512
+
+event number 1 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1513
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1514
+
+event number 2 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 0 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 1515
+
+event number 5 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:13 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1520
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:14 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1524
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:14 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1531
+
+event number 0 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:14 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1533
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:14 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1534
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:14 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1535
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:15 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1538
+
+event number 5 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:15 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1539
+
+event number 0 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:15 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:15 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1540
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:15 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1542
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:15 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1548
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:15 2019
+adjacent nodes are (local): 7 11 13 
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:15 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1553
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 1 11 5 
+
+event number 7 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 1554
+
+event number 5 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1558
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1559
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1560
+
+event number 0 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1562
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1563
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1564
+
+event number 4 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1566
+
+event number 1 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:16 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 1573
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:17 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1578
+
+event number 7 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:17 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1584
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:18 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 0 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:18 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 1586
+
+event number 5 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:18 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 5 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:18 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:18 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1590
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:18 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1593
+
+event number 1 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:18 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:18 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1600
+
+event number 1 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:19 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:19 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1604
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:19 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:19 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1607
+
+event number 7 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:19 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1615
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:19 2019
+adjacent nodes are (local): 7 17 13 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:19 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1619
+
+event number 5 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:20 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1629
+
+event number 1 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:20 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 1630
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:20 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:20 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1631
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:20 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:20 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1633
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 8 18 12 14 
+
+event number 2 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1636
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1637
+
+event number 2 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 1638
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 1642
+
+event number 6 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1643
+
+event number 2 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 2 12 6 
+
+event number 2 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1645
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 1 5 7 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:21 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1651
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1652
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1654
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1655
+
+event number 3 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1656
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1658
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 18 12 14 
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1660
+
+event number 4 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 3 13 7 9 
+
+Iteration 1661
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:22 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1666
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 1668
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1670
+
+event number 4 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1671
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 3 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1673
+
+event number 6 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 1675
+
+event number 1 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1676
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1677
+
+event number 5 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 1680
+
+event number 4 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:23 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1684
+
+event number 1 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 1686
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1688
+
+event number 1 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1690
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 1 11 5 7 
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1692
+
+event number 5 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1694
+
+event number 2 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1696
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:24 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1702
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1704
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1706
+
+event number 4 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 4 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1707
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 1709
+
+event number 4 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 18 12 14 
+
+event number 4 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1710
+
+event number 4 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1714
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1715
+
+event number 0 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:25 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1716
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 7 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1717
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 3 13 7 9 
+
+Iteration 1718
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 1719
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1720
+
+event number 1 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 2 12 8 
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1723
+
+event number 3 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 3 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 3 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 6 16 10 
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1729
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1730
+
+event number 7 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 8 2 4 
+
+event number 7 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 8 18 12 14 
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:26 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1731
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:27 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1735
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:27 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:27 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1741
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:27 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1742
+
+event number 5 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:27 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 1744
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:27 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:27 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1746
+
+event number 3 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1748
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 1 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 5 15 11 
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1749
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 7 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1750
+
+event number 5 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1753
+
+event number 7 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1755
+
+event number 3 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 7 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1756
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 7 17 13 
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1757
+
+event number 2 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 1758
+
+event number 6 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 0 10 6 
+
+Iteration 1761
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:28 2019
+adjacent nodes are (local): 7 17 11 
+
+Iteration 1764
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1765
+
+event number 2 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1767
+
+event number 0 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1770
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 1771
+
+event number 6 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1773
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 8 18 14 
+
+Iteration 1774
+
+event number 1 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 9 19 13 
+
+event number 6 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1776
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1777
+
+event number 6 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 2 12 6 8 
+
+Iteration 1778
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:29 2019
+adjacent nodes are (local): 8 12 14 
+
+Iteration 1780
+
+event number 5 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:30 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1783
+
+event number 2 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:30 2019
+adjacent nodes are (local): 7 17 13 
+
+Iteration 1788
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:30 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1791
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:30 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1792
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:30 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:30 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:30 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1797
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1798
+
+event number 4 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1802
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1806
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1807
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 4 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 12 16 18 
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 4 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1809
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 13 7 9 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:31 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1813
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:32 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1816
+
+event number 3 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:37:32 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 1817
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:32 2019
+adjacent nodes are (local): 1 5 7 
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:32 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1822
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:32 2019
+adjacent nodes are (local): 1 11 7 
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:32 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1823
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:32 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1834
+
+event number 0 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:37:33 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 1837
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:33 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1838
+
+event number 0 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:33 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1840
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:33 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1842
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:33 2019
+adjacent nodes are (local): 2 6 8 
+
+Iteration 1845
+
+event number 3 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:33 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1854
+
+event number 3 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:34 2019
+adjacent nodes are (local): 6 0 2 
+
+Iteration 1856
+
+event number 2 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:34 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1860
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:34 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1861
+
+event number 7 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:34 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1863
+
+event number 7 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 1864
+
+event number 1 detected on local rank 3 (rank 4 globally) with coordinate (0, 3)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 8 2 4 
+
+Iteration 1868
+
+event number 2 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1870
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 8 12 14 
+
+event number 3 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1872
+
+event number 6 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 11 15 17 
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1873
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 6 0 2 
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:35 2019
+adjacent nodes are (local): 2 12 6 8 
+
+Iteration 1879
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:36 2019
+adjacent nodes are (local): 6 10 12 
+
+Iteration 1881
+
+event number 6 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:36 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:36 2019
+adjacent nodes are (local): 6 16 10 
+
+Iteration 1882
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:36 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1888
+
+event number 5 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:36 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 1892
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:36 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1895
+
+event number 7 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 3 13 9 
+
+Iteration 1897
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1899
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 18 12 14 
+
+event number 5 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 1901
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1903
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 3 13 7 
+
+Iteration 1904
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1906
+
+event number 1 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 4 14 8 
+
+Iteration 1909
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1911
+
+event number 0 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:37 2019
+adjacent nodes are (local): 11 5 7 
+
+Iteration 1917
+
+event number 2 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:38 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1919
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:38 2019
+adjacent nodes are (local): 8 18 12 
+
+event number 4 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:38 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1920
+
+event number 1 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:38 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1921
+
+event number 1 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:38 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1923
+
+event number 2 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:38 2019
+adjacent nodes are (local): 7 1 3 
+
+Iteration 1928
+
+event number 4 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 18 12 14 
+
+Iteration 1931
+
+event number 0 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 13 17 19 
+
+Iteration 1932
+
+event number 0 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 6 16 12 
+
+Iteration 1936
+
+event number 5 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1937
+
+event number 7 detected on local rank 18 (rank 19 globally) with coordinate (3, 3)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 13 17 19 
+
+event number 7 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 9 19 13 
+
+event number 7 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 12 6 8 
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 1 11 5 
+
+Iteration 1939
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1940
+
+event number 5 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 5 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 8 18 14 
+
+event number 6 detected on local rank 11 (rank 12 globally) with coordinate (2, 1)
+Timestamp : Sat Oct 19 15:37:39 2019
+adjacent nodes are (local): 16 10 12 
+
+Iteration 1945
+
+event number 6 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:40 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1951
+
+event number 7 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:40 2019
+adjacent nodes are (local): 1 5 7 
+
+Iteration 1957
+
+event number 3 detected on local rank 9 (rank 10 globally) with coordinate (1, 4)
+Timestamp : Sat Oct 19 15:37:40 2019
+adjacent nodes are (local): 4 14 8 
+
+event number 1 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:40 2019
+adjacent nodes are (local): 1 11 7 
+
+Iteration 1958
+
+event number 4 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 5 15 11 
+
+Iteration 1959
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1961
+
+event number 6 detected on local rank 16 (rank 17 globally) with coordinate (3, 1)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 11 15 17 
+
+Iteration 1963
+
+event number 0 detected on local rank 14 (rank 15 globally) with coordinate (2, 4)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 9 19 13 
+
+Iteration 1966
+
+event number 1 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1967
+
+event number 5 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 1 11 7 
+
+event number 5 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 3 13 7 
+
+event number 5 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 5 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 7 11 13 
+
+Iteration 1968
+
+event number 2 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1970
+
+event number 3 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 13 7 9 
+
+Iteration 1971
+
+event number 0 detected on local rank 13 (rank 14 globally) with coordinate (2, 3)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 8 18 12 
+
+Iteration 1972
+
+event number 6 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 2 12 6 
+
+Iteration 1973
+
+event number 2 detected on local rank 2 (rank 3 globally) with coordinate (0, 2)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 7 1 3 
+
+event number 2 detected on local rank 8 (rank 9 globally) with coordinate (1, 3)
+Timestamp : Sat Oct 19 15:37:41 2019
+adjacent nodes are (local): 3 7 9 
+
+Iteration 1978
+
+event number 2 detected on local rank 5 (rank 6 globally) with coordinate (1, 0)
+Timestamp : Sat Oct 19 15:37:42 2019
+adjacent nodes are (local): 0 10 6 
+
+event number 0 detected on local rank 12 (rank 13 globally) with coordinate (2, 2)
+Timestamp : Sat Oct 19 15:37:42 2019
+adjacent nodes are (local): 17 11 13 
+
+Iteration 1980
+
+event number 4 detected on local rank 17 (rank 18 globally) with coordinate (3, 2)
+Timestamp : Sat Oct 19 15:37:42 2019
+adjacent nodes are (local): 12 16 18 
+
+Iteration 1984
+
+event number 0 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:42 2019
+adjacent nodes are (local): 12 6 8 
+
+Iteration 1997
+
+event number 1 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:43 2019
+adjacent nodes are (local): 2 12 8 
+
+Iteration 1998
+
+event number 3 detected on local rank 7 (rank 8 globally) with coordinate (1, 2)
+Timestamp : Sat Oct 19 15:37:43 2019
+adjacent nodes are (local): 2 12 8 
+
+event number 2 detected on local rank 6 (rank 7 globally) with coordinate (1, 1)
+Timestamp : Sat Oct 19 15:37:43 2019
+adjacent nodes are (local): 11 5 7 
+
+event number 2 detected on local rank 10 (rank 11 globally) with coordinate (2, 0)
+Timestamp : Sat Oct 19 15:37:43 2019
+adjacent nodes are (local): 5 15 11 
+

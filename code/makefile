@@ -3,7 +3,7 @@ all: run
 # X and Y control number of nodes in x dimension and y dimension
 X?=4
 Y?=5
-OMP_NUM_THREADS?=1
+OMP_NUM_THREADS?=8
 # N_BIT_RAND defines how many bits random number generated occpy, controls the probability of event will decrease as it increase. The maximum value is 8 as the type of random number is uint8_t
 N_BIT_RAND?=3
 
@@ -14,7 +14,7 @@ N_ITERATION?=2000
 INTERVAL?=10
 
 # MESSAGE_LEN represent the length of message that is passed among sensors. In plaintext, its first byte contains random number generated, and folloing bytes are 0 padding. It would be best to keep this as multiple of 16 (block size in CTR mode)
-MESSAGE_LEN?=32768
+MESSAGE_LEN?=1024
 
 # turn on debugging will result in information being printed to stdout
 DEBUG?=0
