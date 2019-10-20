@@ -12,15 +12,15 @@
 #endif
 // the number of bits each random number have, which also defines the upper bound of random number as 2^n-1, maximum 8 bits
 #ifndef N_BIT_RAND
-#define N_BIT_RAND 2
+#define N_BIT_RAND 3
 #endif
 // run N_INTERATION number times
 #ifndef N_ITERATION
-#define N_ITERATION 200
+#define N_ITERATION 1000
 #endif
 // run sleep ITERVAL millisecond each iteration
 #ifndef INTERVAL
-#define INTERVAL 1
+#define INTERVAL 10
 #endif
 // length of message
 #ifndef MESSAGE_LEN
