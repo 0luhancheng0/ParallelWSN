@@ -11,7 +11,7 @@ OMP_NUM_THREADS?=1
 N_BIT_RAND?=3
 
 # N_INTERATION defines how many iterations the simulation will run
-N_ITERATION?=2000
+N_ITERATION?=200
 
 # Each sensor will wail <INTERVAL> milliseconds between iterations
 INTERVAL?=10

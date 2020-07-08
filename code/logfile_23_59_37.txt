@@ -1,0 +1,103 @@
+Event detection in a fully distributed wireless sensor network - WSN
+
+network configuration overview: 
+Simulation will run 20 iterations with 10 milliseconds time interval between each pair of consecutive iteration
+Network have 2 nodes in X dimension and 3 nodes in Y dimension
+The size of random number is 1 bits, which indicate event number is bound by range [0, 2)
+process and topology summary: 
+	rank 1 in MPI_COMM_WORLD has local rank 0 in local communicatior;
+		Coordinate is (0, 0)
+		Maximum threads: 1
+	rank 2 in MPI_COMM_WORLD has local rank 1 in local communicatior;
+		Coordinate is (0, 1)
+		Maximum threads: 1
+	rank 3 in MPI_COMM_WORLD has local rank 2 in local communicatior;
+		Coordinate is (0, 2)
+		Maximum threads: 1
+	rank 4 in MPI_COMM_WORLD has local rank 3 in local communicatior;
+		Coordinate is (1, 0)
+		Maximum threads: 1
+	rank 5 in MPI_COMM_WORLD has local rank 4 in local communicatior;
+		Coordinate is (1, 1)
+		Maximum threads: 1
+	rank 6 in MPI_COMM_WORLD has local rank 5 in local communicatior;
+		Coordinate is (1, 2)
+		Maximum threads: 1
+details of communication:
+event activation summary: 
+	event 0 is activated 4 times
+	event 1 is activated 8 times
+	total encryption time : 0.000777 seconds
+	total decryption time : 0.000645 seconds
+number of message pass between base station and nodes : 18
+number of message passing happened among nodes: 280
+total events detected: 12
+
+Iteration 3
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 1 3 5 
+
+Iteration 4
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 1 3 5 
+
+Iteration 5
+
+event number 0 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 1 3 5 
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 4 0 2 
+
+Iteration 7
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 1 3 5 
+
+Iteration 8
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 4 0 2 
+
+Iteration 9
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 1 3 5 
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 4 0 2 
+
+Iteration 10
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 4 0 2 
+
+Iteration 13
+
+event number 0 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 4 0 2 
+
+Iteration 17
+
+event number 1 detected on local rank 4 (rank 5 globally) with coordinate (1, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 1 3 5 
+
+Iteration 18
+
+event number 1 detected on local rank 1 (rank 2 globally) with coordinate (0, 1)
+Timestamp : Wed Jul  8 23:59:37 2020
+adjacent nodes are (local): 4 0 2 
+
